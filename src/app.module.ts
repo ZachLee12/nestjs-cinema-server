@@ -3,10 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { MoviesModule } from './modules/movies/movies.module';
-import { MoviesService } from './modules/movies/movies.service';
+import { MongooseModule } from '@nestjs/mongoose';
+
 
 @Module({
-  imports: [MoviesModule, AuthModule],
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost:27017/cinema'),
+    MoviesModule,
+    AuthModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
