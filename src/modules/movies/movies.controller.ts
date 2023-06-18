@@ -27,7 +27,10 @@ export class MoviesController {
         return this.moviesService.updateMovie(id, updateMovieDto)
     }
 
-
+    @Delete(':id')
+    deleteMovie(@Param('id') id: string) {
+        return this.moviesService.deleteProduct(id)
+    }
 
     @Post()
     async addMovie(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto) {

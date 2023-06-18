@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
 import { Movie } from './movie.model';
@@ -24,11 +24,22 @@ export class MoviesService {
     }
 
     async getOneMovie(id: string): Promise<Movie> {
+        let movie;
         try {
-            return await this.movieModel.findById(id)
+            movie = await this.movieModel.findById(id)
         } catch (err) {
+            throw new BadRequestException('Invalid ID format')
+        }
+
+        if (!movie) {
             throw new NotFoundException('Movie not found.')
         }
+        return movie
+    }
+
+    async deleteProduct(id: string) {
+        //in mongoose, id is stored as '_id' property
+        return await this.movieModel.deleteOne({ _id: id })
     }
 
     async updateMovie(id: string, updateMovieDto: UpdateMovieDto) {
@@ -51,8 +62,6 @@ export class MoviesService {
         if (genres) {
             updatedMovie.genres = genres
         }
-
-        // updatedMovie.save()
         return await updatedMovie.save()
     }
 
