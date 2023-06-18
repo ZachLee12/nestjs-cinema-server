@@ -19,14 +19,6 @@ export class Movie {
     name: string;
     description: string;
     actors: string[];
-
-    @Transform(({ value }) => value.trim())
-    @Validate(isValidPlaytime, { message: 'Invalid playtime format. Expected format: "09:00 AM".' })
     playtimes: PlayTime[];
     genres: string[]
-}
-
-function isValidPlaytime(value: string): boolean {
-    const regex = /^(0[1-9]|1[0-2]):([0-5][0-9] [AP]M)$/;
-    return regex.test(value);
 }

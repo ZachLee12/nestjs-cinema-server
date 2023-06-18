@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { PlayTime } from './movie.model';
+import { CreateMovieDto } from './dto/create-movie.dto';
 
 
 @Controller('movies')
@@ -11,14 +12,8 @@ export class MoviesController {
     }
 
     @Post()
-    async addMovie(
-        @Body('name') movieName: string,
-        @Body('description') movieDesc: string,
-        @Body('actors') movieActors: string[],
-        @Body('playtimes', new ValidationPipe()) moviePlaytimes: PlayTime[],
-        @Body('genres') movieGenres: string[]
-    ) {
-        const movieAdded = await this.moviesService.insertMovie(movieName, movieDesc, movieActors, moviePlaytimes, movieGenres)
+    async addMovie(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto) {
+        const movieAdded = await this.moviesService.insertMovie(createMovieDto)
         return movieAdded
     }
 
