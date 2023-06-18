@@ -1,17 +1,13 @@
 import { PlayTime } from "../movie.model";
 import {
     MinLength,
-    ArrayContains,
     ValidatorConstraint,
     ValidatorConstraintInterface,
     ValidationArguments,
     ArrayNotEmpty,
-    ValidateNested,
     Validate,
-    IsString
+    IsString,
 } from 'class-validator'
-import { Type } from 'class-transformer'
-
 
 @ValidatorConstraint({ name: 'ValidatePlaytimeRegex', async: false })
 export class ValidatePlaytimeRegex implements ValidatorConstraintInterface {
@@ -34,10 +30,12 @@ export class CreateMovieDto {
 
     @MinLength(5)
     description: string;
+
+    @IsString({ each: true })
+    @MinLength(1, { each: true })
     actors: string[];
 
     @ArrayNotEmpty()
-    // @ValidateNested({ each: true })
     @Validate(ValidatePlaytimeRegex, { each: true })
     playtimes: PlayTime[];
     genres: string[]

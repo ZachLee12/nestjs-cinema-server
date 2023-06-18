@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
 import { Movie } from './movie.model';
-import { PlayTime } from './movie.model';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Injectable()
 export class MoviesService {
@@ -19,12 +19,41 @@ export class MoviesService {
         return newMovie;
     }
 
-    getMovies() {
-        return []
+    async getMovies(): Promise<Movie[]> {
+        return await this.movieModel.find()
     }
 
-    getOneMovie() {
-        return null;
+    async getOneMovie(id: string): Promise<Movie> {
+        try {
+            return await this.movieModel.findById(id)
+        } catch (err) {
+            throw new NotFoundException('Movie not found.')
+        }
+    }
+
+    async updateMovie(id: string, updateMovieDto: UpdateMovieDto) {
+        const updatedMovie = await this.getOneMovie(id)
+        const { name, description, playtimes, actors, genres } = updateMovieDto
+        console.log(updateMovieDto)
+        if (name) {
+            updatedMovie.name = name
+            console.log(name)
+        }
+        if (description) {
+            updatedMovie.description = description
+        }
+        if (playtimes) {
+            updatedMovie.playtimes = playtimes
+        }
+        if (actors) {
+            updatedMovie.actors = actors
+        }
+        if (genres) {
+            updatedMovie.genres = genres
+        }
+
+        // updatedMovie.save()
+        return await updatedMovie.save()
     }
 
 

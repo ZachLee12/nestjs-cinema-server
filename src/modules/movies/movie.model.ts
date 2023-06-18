@@ -1,5 +1,4 @@
-import { Validate } from 'class-validator';
-import { Transform } from 'class-transformer';
+
 import * as mongoose from 'mongoose'
 
 
@@ -14,7 +13,7 @@ export const MovieSchema = new mongoose.Schema({
 
 export type PlayTime = `${number}${number}:${number}${number} ${'AM' | 'PM'}`
 
-export class Movie {
+export class Movie extends mongoose.Document {
     id: string;
     name: string;
     description: string;
