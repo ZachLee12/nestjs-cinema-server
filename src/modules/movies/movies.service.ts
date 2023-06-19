@@ -42,7 +42,16 @@ export class MoviesService {
     }
 
     async updateMovie(id: string, updateMovieDto: UpdateMovieDto) {
-        const updatedMovie = this.movieModel.updateOne({ _id: id }, { $set: updateMovieDto })
+        let updatedMovie = null;
+        try {
+            updatedMovie = await this.movieModel.updateOne({ _id: id }, { $set: updateMovieDto })
+        } catch (err) {
+            throw new BadRequestException('Invalid ID format')
+        }
+
+        if (updatedMovie.matchedCount === 0) {
+            throw new NotFoundException(`Movie #${id} not found`)
+        }
         return updatedMovie
     }
 
