@@ -7,13 +7,12 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Injectable()
 export class MoviesService {
-    constructor(@InjectModel('Movie') private readonly movieModel: Model<Movie>) {
+    constructor(@InjectModel(Movie.name) private readonly movieModel: Model<Movie>) {
 
     }
 
     async insertMovie(createMovieDto: CreateMovieDto) {
-        const { name, description, actors, playtimes, genres } = createMovieDto
-        const newMovie = new this.movieModel({ name, description, actors, playtimes, genres })
+        const newMovie = new this.movieModel(createMovieDto)
         await newMovie.save(); //save returns a promise
         console.log(newMovie)
         return newMovie;
@@ -24,7 +23,7 @@ export class MoviesService {
     }
 
     async getOneMovie(id: string): Promise<Movie> {
-        let movie;
+        let movie = null;
         try {
             movie = await this.movieModel.findById(id)
         } catch (err) {
@@ -43,26 +42,8 @@ export class MoviesService {
     }
 
     async updateMovie(id: string, updateMovieDto: UpdateMovieDto) {
-        const updatedMovie = await this.getOneMovie(id)
-        const { name, description, playtimes, actors, genres } = updateMovieDto
-        console.log(updateMovieDto)
-        if (name) {
-            updatedMovie.name = name
-            console.log(name)
-        }
-        if (description) {
-            updatedMovie.description = description
-        }
-        if (playtimes) {
-            updatedMovie.playtimes = playtimes
-        }
-        if (actors) {
-            updatedMovie.actors = actors
-        }
-        if (genres) {
-            updatedMovie.genres = genres
-        }
-        return await updatedMovie.save()
+        const updatedMovie = this.movieModel.updateOne({ _id: id }, { $set: updateMovieDto })
+        return updatedMovie
     }
 
 
