@@ -26,3 +26,7 @@ export class User extends mongoose.Document {
         watched: string[]
     }
 }
+
+export enum UserEnum {
+    name = 'User'
+}

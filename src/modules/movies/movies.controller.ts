@@ -34,7 +34,7 @@ export class MoviesController {
 
     @Post()
     async addMovie(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto) {
-        const movieAdded = await this.moviesService.insertMovie(createMovieDto)
+        const movieAdded = await this.moviesService.addMovie(createMovieDto)
         return movieAdded as CreateMovieDto
     }
 

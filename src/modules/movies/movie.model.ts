@@ -21,3 +21,7 @@ export class Movie extends mongoose.Document {
     playtimes: PlayTime[];
     genres: string[]
 }
+
+export enum MovieEnum {
+    name = "Movie"
+}

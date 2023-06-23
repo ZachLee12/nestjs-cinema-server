@@ -6,9 +6,7 @@ import { MovieSchema } from './movie.model';
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'Movie', schema: MovieSchema }])],
-  controllers: [
-    MoviesController,
-  ],
+  controllers: [MoviesController],
   providers: [MoviesService]
 })
 export class MoviesModule { }
