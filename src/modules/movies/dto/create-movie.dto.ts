@@ -10,7 +10,7 @@ import {
 } from 'class-validator'
 
 @ValidatorConstraint({ name: 'ValidatePlaytimeRegex', async: false })
-export class ValidatePlaytimeRegex implements ValidatorConstraintInterface {
+class ValidatePlaytimeRegex implements ValidatorConstraintInterface {
     validate(text: string, args: ValidationArguments) {
         let regex = /^[0-9][0-9]:[0-9][0-9] \b(?:AM|PM)\b$/
         return regex.test(text) // for async validations you must return a Promise<boolean> here
