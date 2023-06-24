@@ -1,6 +1,18 @@
-import { Body, Controller, Get, Post, Delete, Param, ValidationPipe, NotFoundException } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Param,
+  ValidationPipe,
+  UseGuards,
+  Request,
+  NotFoundException
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { AuthGuard } from '../auth/guards/auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -14,6 +26,12 @@ export class UsersController {
   @Get()
   getUsers() {
     return this.usersService.getUsers()
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getOneUser(@Request() request) {
+    return request.user
   }
 
   @Post()
