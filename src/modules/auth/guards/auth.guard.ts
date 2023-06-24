@@ -24,7 +24,6 @@ export class AuthGuard implements CanActivate {
     try {
       //verify the JWT token passed in from client, with the secret that the server has.
       //JWT secret = a "password" that is used to sign the JWT token
-      console.log(token)
       const payload = await this.jwtService.verifyAsync(token, { secret: jwtConstants.secret })
 
       // 💡 We're assigning the payload to the request object here
