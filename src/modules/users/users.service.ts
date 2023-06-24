@@ -23,6 +23,10 @@ export class UsersService {
             .catch(err => { throw new Error('User not saved.') })
     }
 
+    async getOneUser(username: string): Promise<User> {
+        return await this.userModel.findOne({ username })
+    }
+
     //In services, handle the Errors in the context of backend services,
     //do not throw HTTP errors, because the Controller should do that instead\
     //Throw an error here, which will be caught by the Controller, then the controller

@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Post, Delete, Param, ValidationPipe, NotFoundException } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './user.model';
 
 @Controller('users')
 export class UsersController {
@@ -26,11 +25,10 @@ export class UsersController {
   @Delete(':id')
   async deleteUser(@Param('id') id: string) {
     try {
-      const result = await this.usersService.deleteUser(id)
+      await this.usersService.deleteUser(id)
     } catch (err) {
       throw new NotFoundException(`User ${id} not found.`)
     }
-
     return id;
   }
 }
