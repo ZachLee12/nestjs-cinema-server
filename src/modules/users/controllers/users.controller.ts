@@ -8,11 +8,13 @@ import {
   ValidationPipe,
   UseGuards,
   Request,
-  NotFoundException
+  NotFoundException,
+  UsePipes
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { AuthGuard } from '../../auth/guards/auth.guard';
+import { EncryptionPipe } from '../pipes/encryption/encryption.pipe';
 
 @Controller('users')
 export class UsersController {
@@ -35,7 +37,8 @@ export class UsersController {
   }
 
   @Post()
-  async addUser(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
+  @UsePipes(new ValidationPipe(), new EncryptionPipe())
+  async addUser(@Body() createUserDto: CreateUserDto) {
     const addedUser = await this.usersService.addUser(createUserDto)
     return addedUser
   }
