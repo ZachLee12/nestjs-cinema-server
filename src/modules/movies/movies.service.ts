@@ -35,7 +35,7 @@ export class MoviesService {
         return movie
     }
 
-    async deleteProduct(id: string) {
+    async deleteMovie(id: string) {
         //in mongoose, id is stored as '_id' property
         return await this.movieModel.deleteOne({ _id: id })
     }

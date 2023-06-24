@@ -23,8 +23,6 @@ class ValidatePlaytimeRegex implements ValidatorConstraintInterface {
 }
 
 export class CreateMovieDto {
-    id: string;
-
     @MinLength(2)
     name: string;
 

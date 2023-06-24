@@ -9,7 +9,6 @@ export const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
     movies: {
         liked: [String],
-        disliked: [String],
         watched: [String]
     }
 })
@@ -22,7 +21,6 @@ export class User extends mongoose.Document {
     password: string;
     movies: {
         liked: string[],
-        disliked: string[],
         watched: string[]
     }
 }

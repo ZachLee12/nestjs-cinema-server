@@ -12,6 +12,11 @@ export class MoviesController {
 
     }
 
+    @Get('testConnection')
+    getTestResponse() {
+        return { message: 'movies endpoint' }
+    }
+
     @Get()
     async getMovies(): Promise<Movie[]> {
         return this.moviesService.getMovies()
@@ -29,13 +34,13 @@ export class MoviesController {
 
     @Delete(':id')
     deleteMovie(@Param('id') id: string) {
-        return this.moviesService.deleteProduct(id)
+        return this.moviesService.deleteMovie(id)
     }
 
     @Post()
-    async addMovie(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto) {
+    async addMovie(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto): Promise<Movie> {
         const movieAdded = await this.moviesService.addMovie(createMovieDto)
-        return movieAdded as CreateMovieDto
+        return movieAdded as Movie
     }
 
 }
