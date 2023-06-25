@@ -39,8 +39,13 @@ export class UsersController {
   @Post()
   @UsePipes(new ValidationPipe(), new EncryptionPipe())
   async addUser(@Body() createUserDto: CreateUserDto) {
-    const addedUser = await this.usersService.addUser(createUserDto)
-    return addedUser
+    try {
+      await this.usersService.addUser(createUserDto)
+    } catch (err) {
+      throw err
+    }
+
+    return { message: 'user created' }
   }
 
   @Delete(':id')

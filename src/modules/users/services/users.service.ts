@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserEnum } from '../user.model';
 import { CreateUserDto } from '../dto/create-user.dto';
-import * as bcrypt from 'bcrypt'
+
 
 @Injectable()
 export class UsersService {
@@ -16,6 +16,9 @@ export class UsersService {
     }
 
     async addUser(createUserDto: CreateUserDto): Promise<User> {
+        if (await this.getOneUser(createUserDto.username)) {
+            throw new BadRequestException('Username already taken.')
+        }
 
         const newUser = new this.userModel(createUserDto)
         return newUser.save()
