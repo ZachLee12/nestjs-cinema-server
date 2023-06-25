@@ -5,7 +5,6 @@ import {
     Request,
     Res
 } from '@nestjs/common';
-import { Response } from 'express';
 import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
@@ -16,9 +15,9 @@ export class AuthController {
     ) { }
 
     @Post('login')
-    async login(@Res({ passthrough: true }) res: Response, @Body('username') username: string, @Body('password') password: string) {
-        const jwtToken = await this.authService.signIn(username, password)
-        return jwtToken as { accessToken: string }
+    async login(@Body('username') username: string, @Body('password') password: string) {
+        const accessToken = await this.authService.signIn(username, password)
+        return accessToken as { accessToken: string }
     }
 
 

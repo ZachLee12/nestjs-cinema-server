@@ -12,7 +12,7 @@ import { jwtConstants } from './constants';
         JwtModule.register({
             global: true,
             secret: jwtConstants.access_token_secret,
-            signOptions: { expiresIn: '100000s' }
+            signOptions: { expiresIn: '15m' }
         })
     ],
     providers: [AuthService],

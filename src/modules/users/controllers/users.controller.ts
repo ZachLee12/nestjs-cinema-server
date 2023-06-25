@@ -32,8 +32,8 @@ export class UsersController {
 
   @Get(':username')
   @UseGuards(AuthGuard)
-  async getOneUser(@Param('username') username: string) {
-    return await this.usersService.getOneUser(username)
+  getOneUser(@Param('username') username: string) {
+    return this.usersService.getOneUser(username)
   }
 
   @Post()
@@ -44,7 +44,6 @@ export class UsersController {
     } catch (err) {
       throw err
     }
-
     return { message: 'user created' }
   }
 
