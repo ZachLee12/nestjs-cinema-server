@@ -30,10 +30,10 @@ export class UsersController {
     return this.usersService.getUsers()
   }
 
-  @Get('profile')
+  @Get(':username')
   @UseGuards(AuthGuard)
-  getOneUser(@Request() request) {
-    return request.user
+  async getOneUser(@Param('username') username: string) {
+    return await this.usersService.getOneUser(username)
   }
 
   @Post()

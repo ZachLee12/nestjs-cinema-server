@@ -29,8 +29,7 @@ export class UsersService {
     }
 
     async getOneUser(username: string): Promise<User> {
-        return await this.userModel.findOne({ username })
-
+        return await this.userModel.findOne({ username }).select('-password')
     }
 
     //In services, handle the Errors in the context of backend services,

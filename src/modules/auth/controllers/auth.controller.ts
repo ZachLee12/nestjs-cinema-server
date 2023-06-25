@@ -18,7 +18,6 @@ export class AuthController {
     @Post('login')
     async login(@Res({ passthrough: true }) res: Response, @Body('username') username: string, @Body('password') password: string) {
         const jwtToken = await this.authService.signIn(username, password)
-        res.cookie('jwt', jwtToken, { httpOnly: true, sameSite: 'strict' })
         return jwtToken as { accessToken: string }
     }
 
