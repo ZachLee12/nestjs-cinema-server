@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt/dist';
 import { UsersService } from '../../users/services/users.service';
 import * as bcrypt from 'bcrypt'
@@ -7,7 +7,8 @@ import { User } from 'src/modules/users/user.model';
 @Injectable()
 export class AuthService {
     constructor(
-        private jwtService: JwtService,
+        @Inject('REFRESH_TOKEN_JWT_SERVICE') private refreshTokenService: JwtService,
+        @Inject('ACCESS_TOKEN_JWT_SERVICE') private accessTokenService: JwtService,
         private usersService: UsersService
     ) { }
 
@@ -32,12 +33,12 @@ export class AuthService {
 
     private async generateAccessToken(user: User) {
         const payload = { sub: user.id, username: user.username, age: user.age };
-        return await this.jwtService.signAsync(payload)
+        return await this.accessTokenService.signAsync(payload)
     }
 
     private async generateRefreshToken(user: User) {
         const payload = { sub: user.id, username: user.username, age: user.age };
-        return await this.jwtService.signAsync(payload)
+        return await this.refreshTokenService.signAsync(payload)
     }
 
 }

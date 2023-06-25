@@ -1,6 +1,7 @@
 import {
   CanActivate,
   ExecutionContext,
+  Inject,
   Injectable,
   UnauthorizedException
 } from '@nestjs/common';
@@ -10,7 +11,7 @@ import { jwtConstants } from '../constants';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) { }
+  constructor(@Inject('ACCESS_TOKEN_JWT_SERVICE') private accessTokenService: JwtService) { }
   async canActivate(
     context: ExecutionContext,
   ): Promise<boolean> {
@@ -23,7 +24,7 @@ export class AuthGuard implements CanActivate {
     try {
       //verify the JWT token passed in from client, with the secret that the server has.
       //JWT secret = a "password" that is used to sign the JWT token
-      const payload = await this.jwtService.verifyAsync(token, { secret: jwtConstants.access_token_secret })
+      const payload = await this.accessTokenService.verifyAsync(token, { secret: jwtConstants.access_token_secret })
 
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers

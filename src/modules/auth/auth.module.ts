@@ -4,16 +4,15 @@ import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './controllers/auth.controller';
 import { jwtConstants } from './constants';
+import { RefreshTokenModule } from './refresh-token/refresh-token.module';
+import { AccessTokenModule } from './access-token/access-token.module';
 
 
 @Module({
     imports: [
         UsersModule,
-        JwtModule.register({
-            global: true,
-            secret: jwtConstants.access_token_secret,
-            signOptions: { expiresIn: '15m' }
-        })
+        AccessTokenModule,
+        RefreshTokenModule,
     ],
     providers: [AuthService],
     controllers: [AuthController],
