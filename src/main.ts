@@ -13,7 +13,7 @@ async function bootstrap() {
     .addTag('cinema')
     .build();
 
-  
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document)
   app.enableCors({ origin: "http://localhost:4200" })
