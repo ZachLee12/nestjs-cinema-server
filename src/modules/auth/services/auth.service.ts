@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt/dist';
 import { UsersService } from '../../users/services/users.service';
 import * as bcrypt from 'bcrypt'
 import { User } from 'src/modules/users/user.model';
+import { Tokens } from '../interfaces';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
         private usersService: UsersService
     ) { }
 
-    async signIn(username: string, password: string) {
+    async signIn(username: string, password: string): Promise<Tokens> {
         const user = await this.usersService.getOneUser(username)
         if (!user) {
             throw new BadRequestException('Incorrect credentials')
@@ -29,6 +30,10 @@ export class AuthService {
             accessToken: await this.generateAccessToken(user),
             refreshToken: await this.generateRefreshToken(user)
         }
+    }
+
+    signout(): Tokens { //revoke both access and refresh tokens
+        return { accessToken: null, refreshToken: null };
     }
 
     private async generateAccessToken(user: User) {
