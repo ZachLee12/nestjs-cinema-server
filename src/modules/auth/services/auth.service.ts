@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, HttpException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt/dist';
 import { UsersService } from '../../users/services/users.service';
 import * as bcrypt from 'bcrypt'
@@ -34,6 +34,16 @@ export class AuthService {
 
     signout(): Tokens { //revoke both access and refresh tokens
         return { accessToken: null, refreshToken: null };
+    }
+
+    async refreshAccessToken(refreshToken: string) {
+        const isRefreshTokenValid = await this.refreshTokenService.verifyAsync(refreshToken)
+        if (isRefreshTokenValid) {
+            const { username } = this.refreshTokenService.decode(refreshToken) as any
+            return await this.generateAccessToken(username)
+        } else {
+            throw new BadRequestException('Invalid refresh token')
+        }
     }
 
     private async generateAccessToken(user: User) {

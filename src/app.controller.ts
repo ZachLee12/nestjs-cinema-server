@@ -6,7 +6,7 @@ import {
   Post
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { AuthGuard } from './modules/auth/guards/auth.guard';
+import { AuthGuard } from './modules/auth/guards/auth/auth.guard';
 import { Request } from 'express';
 
 @Controller()

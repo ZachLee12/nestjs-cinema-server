@@ -8,7 +8,7 @@ import { jwtConstants } from '../constants';
         JwtModule.register({
             global: true,
             secret: jwtConstants.access_token_secret,
-            signOptions: { expiresIn: '5m' }
+            signOptions: { expiresIn: '2s' }
         })
     ],
     providers: [{
