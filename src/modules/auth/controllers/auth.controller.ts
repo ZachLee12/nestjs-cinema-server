@@ -1,13 +1,16 @@
+//https://stackoverflow.com/questions/61334475/nestjs-with-mongoose-schema-interface-and-dto-approach-question
 import {
     Controller,
     Post,
     Body,
     Get,
-    Res
+    UsePipes,
+    ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../interfaces';
-import { Request } from 'express';
+import { TokenDto } from '../dto/token.dto';
+
 
 @Controller('auth')
 export class AuthController {
@@ -17,8 +20,14 @@ export class AuthController {
     ) { }
 
     @Post('refreshAccessToken')
-    async refreshToken(@Body('refreshToken') refreshToken: string): Promise<any> {
-        const newToken = await this.authService.refreshAccessToken(refreshToken)
+    @UsePipes(new ValidationPipe())
+    async refreshToken(@Body('refreshToken') refreshToken: TokenDto): Promise<Tokens> {
+        let newToken = null;
+        try {
+            newToken = await this.authService.refreshAccessToken(refreshToken as string)
+        } catch (err) {
+            throw err
+        }
         return { accessToken: newToken }
     }
 
