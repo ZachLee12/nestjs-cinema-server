@@ -1,9 +1,9 @@
 import { Injectable, HttpException, HttpStatus, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
-import { Movie, MovieEnum } from './movie.model';
-import { CreateMovieDto } from './dto/create-movie.dto';
-import { UpdateMovieDto } from './dto/update-movie.dto';
+import { Movie, MovieEnum } from '../movie.model';
+import { CreateMovieDto } from '../dto/create-movie.dto';
+import { UpdateMovieDto } from '../dto/update-movie.dto';
 
 @Injectable()
 export class MoviesService {
