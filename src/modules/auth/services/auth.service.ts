@@ -42,8 +42,8 @@ export class AuthService {
             const { username } = this.refreshTokenService.decode(refreshToken) as any
             return await this.generateAccessToken(username)
 
-        } catch (err) {
-            throw new HttpException({ status: HttpStatus.UNAUTHORIZED, error: err }, HttpStatus.UNAUTHORIZED)
+        } catch (errorObject) {
+            throw new HttpException({ status: HttpStatus.BAD_REQUEST, error: errorObject }, HttpStatus.BAD_REQUEST)
         }
     }
 
