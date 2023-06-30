@@ -6,6 +6,7 @@ import {
     Get,
     UsePipes,
     ValidationPipe,
+    HttpException,
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../interfaces';
@@ -20,26 +21,25 @@ export class AuthController {
     ) { }
 
     @Post('refreshAccessToken')
-    @UsePipes(new ValidationPipe())
-    async refreshToken(@Body('refreshToken') refreshToken: TokenDto): Promise<Tokens> {
-        let newToken = null;
+    async refreshToken(@Body('refreshToken') refreshToken: string): Promise<Tokens> {
         try {
-            newToken = await this.authService.refreshAccessToken(refreshToken as string)
+            const newToken = await this.authService.refreshAccessToken(refreshToken as string)
+            return { accessToken: newToken }
+
         } catch (err) {
-            throw err
+            throw err as HttpException
         }
-        return { accessToken: newToken }
     }
 
 
     @Post('login')
-    async login(@Body('username') username: string, @Body('password') password: string) {
+    async login(@Body('username') username: string, @Body('password') password: string): Promise<Tokens> {
         const tokens = await this.authService.signIn(username, password)
-        return tokens as Tokens
+        return tokens
     }
 
     @Get('logout')
-    logout() {
+    logout(): Tokens {
         const revokedTokens = this.authService.signout()
         return revokedTokens;
     }

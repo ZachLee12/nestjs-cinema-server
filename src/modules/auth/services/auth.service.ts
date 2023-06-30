@@ -33,7 +33,7 @@ export class AuthService {
     }
 
     signout(): Tokens { //revoke both access and refresh tokens
-        return { accessToken: null, refreshToken: null };
+        return { accessToken: '', refreshToken: '' };
     }
 
     async refreshAccessToken(refreshToken: string): Promise<string> {
@@ -56,5 +56,4 @@ export class AuthService {
         const payload = { sub: user.id, username: user.username, age: user.age };
         return await this.refreshTokenService.signAsync(payload)
     }
-
 }
