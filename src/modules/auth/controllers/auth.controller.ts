@@ -4,14 +4,10 @@ import {
     Post,
     Body,
     Get,
-    UsePipes,
-    ValidationPipe,
     HttpException,
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../interfaces';
-import { TokenDto } from '../dto/token.dto';
-
 
 @Controller('auth')
 export class AuthController {
@@ -25,7 +21,6 @@ export class AuthController {
         try {
             const newToken = await this.authService.refreshAccessToken(refreshToken as string)
             return { accessToken: newToken }
-
         } catch (err) {
             throw err as HttpException
         }
