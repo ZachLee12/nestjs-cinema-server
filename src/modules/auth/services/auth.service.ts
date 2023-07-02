@@ -40,7 +40,8 @@ export class AuthService {
         try {
             await this.refreshTokenService.verifyAsync(refreshToken)
             const { username } = this.refreshTokenService.decode(refreshToken) as any
-            return await this.generateAccessToken(username)
+            const user = await this.usersService.getOneUser(username)
+            return await this.generateAccessToken(user)
 
         } catch (errorObject) {
             throw new HttpException({ status: HttpStatus.BAD_REQUEST, error: errorObject }, HttpStatus.BAD_REQUEST)
@@ -49,12 +50,12 @@ export class AuthService {
 
     private async generateAccessToken(user: User) {
         console.log(user)
-        const payload = { sub: user.id, username: user.username, age: user.age };
+        const payload = { sub: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, age: user.age };
         return await this.accessTokenService.signAsync(payload)
     }
 
     private async generateRefreshToken(user: User) {
-        const payload = { sub: user.id };
+        const payload = { sub: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, age: user.age };
         return await this.refreshTokenService.signAsync(payload)
     }
 }
