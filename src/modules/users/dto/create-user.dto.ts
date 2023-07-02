@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsString, MinLength, Validate, ValidateNested, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
+import { IsDate, IsNotEmpty, IsNumber, IsObject, IsString, MinLength, Validate, ValidateNested, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 
 @ValidatorConstraint({ name: 'ValidateStrongPassword', async: false })
 class ValidateStrongPassword implements ValidatorConstraintInterface {
@@ -15,24 +15,30 @@ class ValidateStrongPassword implements ValidatorConstraintInterface {
 
 export class CreateUserDto {
     @IsNotEmpty()
+    @IsString()
     firstname: string;
 
     @IsNotEmpty()
+    @IsString()
     lastname: string;
 
     @IsNotEmpty()
+    @IsNumber()
     age: number;
 
     @IsNotEmpty()
     birthday: string;
 
     @MinLength(3)
+    @IsString()
     username: string;
 
     @Validate(ValidateStrongPassword)
+    @IsString()
     password: string;
 
     @IsNotEmpty()
+    @IsObject()
     movies: { liked: string[], watched: string[] }
 }
 
