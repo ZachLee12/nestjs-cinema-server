@@ -16,12 +16,12 @@ export class AuthService {
     async signIn(username: string, password: string): Promise<Tokens> {
         const user = await this.usersService.getOneUser(username)
         if (!user) {
-            throw new BadRequestException('Incorrect credentials. Check your username or password.')
+            throw new UnauthorizedException('Incorrect credentials. Check your username or password.')
         }
         const match = await bcrypt.compare(password, user.password)
 
         if (!match) {
-            throw new BadRequestException('Incorrect credentials. Check your username or password.')
+            throw new UnauthorizedException('Incorrect credentials. Check your username or password.')
         }
 
         //sign the JWT token, and the contents of the token will have the payload,
@@ -48,12 +48,13 @@ export class AuthService {
     }
 
     private async generateAccessToken(user: User) {
+        console.log(user)
         const payload = { sub: user.id, username: user.username, age: user.age };
         return await this.accessTokenService.signAsync(payload)
     }
 
     private async generateRefreshToken(user: User) {
-        const payload = { sub: user.id, username: user.username, age: user.age };
+        const payload = { sub: user.id };
         return await this.refreshTokenService.signAsync(payload)
     }
 }

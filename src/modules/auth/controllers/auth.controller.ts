@@ -29,8 +29,12 @@ export class AuthController {
 
     @Post('login')
     async login(@Body('username') username: string, @Body('password') password: string): Promise<Tokens> {
-        const tokens = await this.authService.signIn(username, password)
-        return tokens
+        try {
+            const tokens = await this.authService.signIn(username, password)
+            return tokens
+        } catch (err) {
+            throw err
+        }
     }
 
     @Get('logout')
