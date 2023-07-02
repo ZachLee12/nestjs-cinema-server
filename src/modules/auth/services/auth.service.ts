@@ -36,6 +36,15 @@ export class AuthService {
         return { accessToken: '', refreshToken: '' };
     }
 
+    async verifyRefreshToken(refreshToken: string) {
+        try {
+            await this.refreshTokenService.verifyAsync(refreshToken)
+            return { message: `refresh token is still valid. You're good to go!` }
+        } catch (errorObject) {
+            throw new HttpException({ status: HttpStatus.BAD_REQUEST, error: errorObject }, HttpStatus.BAD_REQUEST)
+        }
+    }
+
     async refreshAccessToken(refreshToken: string): Promise<string> {
         try {
             await this.refreshTokenService.verifyAsync(refreshToken)
@@ -49,7 +58,6 @@ export class AuthService {
     }
 
     private async generateAccessToken(user: User) {
-        console.log(user)
         const payload = { sub: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, age: user.age };
         return await this.accessTokenService.signAsync(payload)
     }
