@@ -7,6 +7,7 @@ import {
     ArrayNotEmpty,
     Validate,
     IsString,
+    IsNotEmpty,
 } from 'class-validator'
 
 @ValidatorConstraint({ name: 'ValidatePlaytimeRegex', async: false })
@@ -36,6 +37,10 @@ export class CreateMovieDto {
     @ArrayNotEmpty()
     @Validate(ValidatePlaytimeRegex, { each: true })
     playtimes: PlayTime[];
-    genres: string[]
+    genres: string[];
+
+    @IsString()
+    @IsNotEmpty()
+    imgUrl: string;
 }
 
