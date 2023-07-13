@@ -9,3 +9,27 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            String   @id @default(uuid())
+  firstname     String
+  lastname      String
+  age           Int
+  birthday      DateTime
+  username      String
+  password      String
+  likedMovies   Movie[]  @relation("LikedByUsers")
+  watchedMovies Movie[]  @relation("WatchedByUsers")
+}
+
+model Movie {
+  id             String   @id @default(uuid())
+  name           String   @unique
+  description    String
+  actors         String[]
+  showtimes      String[]
+  genres         String[]
+  imgUrl         String?
+  likedByUsers   User[]   @relation("LikedByUsers")
+  watchedByUsers User[]   @relation("WatchedByUsers")
+}
