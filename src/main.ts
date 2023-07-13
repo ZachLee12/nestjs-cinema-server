@@ -10,7 +10,7 @@ async function bootstrap() {
     .setTitle('NestJS Cinema Server')
     .setDescription('SWENG Project backend rewritten with NestJS')
     .setVersion('1.0')
-    .addTag('cinema')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' })
     .build();
 
 

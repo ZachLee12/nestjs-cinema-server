@@ -8,6 +8,15 @@ import {
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../interfaces';
+import { ApiBody, ApiProperty } from '@nestjs/swagger';
+import { CreateUserDto } from 'src/modules/users/dto/create-user.dto';
+
+class Credentials {
+    @ApiProperty()
+    username: string
+    @ApiProperty()
+    password: string
+}
 
 @Controller('auth')
 export class AuthController {
@@ -28,6 +37,7 @@ export class AuthController {
 
 
     @Post('login')
+    @ApiBody({ type: Credentials })
     async login(@Body('username') username: string, @Body('password') password: string): Promise<Tokens> {
         try {
             const tokens = await this.authService.signIn(username, password)
