@@ -18,7 +18,9 @@ import { EncryptionPipe } from '../pipes/encryption/encryption.pipe';
 
 @Controller('protected/users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(
+    private readonly usersService: UsersService
+  ) { }
 
   @Get('testConnection')
   getTestResponse() {
@@ -39,18 +41,18 @@ export class UsersController {
 
   @Post()
   @UsePipes(new ValidationPipe(), new EncryptionPipe())
-  async addUser(@Body() createUserDto: CreateUserDto) {
+  async addUser(@Body() createUserDto: CreateUserDto): Promise<{ message: string } | Error> {
     try {
-      await this.usersService.addUser(createUserDto)
+      const user = await this.usersService.create(createUserDto)
+      return { message: `user [${user.id}] created` }
     } catch (err) {
       throw err
     }
-    return { message: 'user created' }
   }
 
   @Delete(':id')
   async deleteUser(@Param('id') id: string) {
-
-    return id;
+    await this.usersService.deleteOne(id)
+    return { message: `user [${id}]  deleted` };
   }
 }

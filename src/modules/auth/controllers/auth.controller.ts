@@ -5,6 +5,8 @@ import {
     Body,
     Get,
     HttpException,
+    UnauthorizedException,
+    BadRequestException
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../interfaces';
@@ -43,6 +45,7 @@ export class AuthController {
             const tokens = await this.authService.signIn(username, password)
             return tokens
         } catch (err) {
+            console.log(err)
             throw err
         }
     }

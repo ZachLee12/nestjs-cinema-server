@@ -1,22 +1,19 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User, UserEnum } from '../user.model';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { PrismaService } from 'src/global/prisma.service';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
     constructor(
-        @InjectModel(UserEnum.name) private readonly userModel: Model<User>,
         private prismaService: PrismaService
     ) { }
 
     async getUsers(): Promise<any> {
-        // return await this.userModel.find();
+        return await this.prismaService.user.findMany();
     }
 
-    async addUser(createUserDto: CreateUserDto): Promise<any> {
+    async create(createUserDto: CreateUserDto): Promise<User> {
         if (await this.findOne(createUserDto.username)) {
             throw new BadRequestException('Username already taken.')
         }
@@ -41,5 +38,16 @@ export class UsersService {
         return user
     }
 
+    async deleteOne(id: string) {
+        const user = await this.prismaService.user.delete(
+            {
+                where: {
+                    id
+                }
+            }
+        )
+
+        return user
+    }
 
 }

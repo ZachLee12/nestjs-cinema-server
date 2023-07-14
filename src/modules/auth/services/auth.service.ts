@@ -17,12 +17,12 @@ export class AuthService {
         const user = await this.usersService.findOne(username)
         console.log(user)
         if (!user) {
-            throw new UnauthorizedException('Incorrect credentials. Check your username or password.')
+            throw new BadRequestException('Incorrect credentials. Check your username or password.')
         }
         const match = await bcrypt.compare(password, user.password)
 
         if (!match) {
-            throw new UnauthorizedException('Incorrect credentials. Check your username or password.')
+            throw new BadRequestException('Incorrect credentials. Check your username or password.')
         }
 
         //sign the JWT token, and the contents of the token will have the payload,
