@@ -14,7 +14,7 @@ export const MovieSchema = new mongoose.Schema({
 
 export type PlayTime = `${number}${number}:${number}${number} ${'AM' | 'PM'}`
 
-export class Movie extends mongoose.Document {
+export class Movie {
     id: string;
     name: string;
     description: string;
