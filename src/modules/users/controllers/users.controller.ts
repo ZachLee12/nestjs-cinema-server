@@ -34,7 +34,7 @@ export class UsersController {
   @Get(':username')
   @UseGuards(AuthGuard)
   getOneUser(@Param('username') username: string) {
-    return this.usersService.getOneUser(username)
+    return this.usersService.findOne(username)
   }
 
   @Post()
@@ -50,11 +50,7 @@ export class UsersController {
 
   @Delete(':id')
   async deleteUser(@Param('id') id: string) {
-    try {
-      await this.usersService.deleteUser(id)
-    } catch (err) {
-      throw new NotFoundException(`User ${id} not found.`)
-    }
+
     return id;
   }
 }

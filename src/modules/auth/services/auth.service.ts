@@ -14,7 +14,8 @@ export class AuthService {
     ) { }
 
     async signIn(username: string, password: string): Promise<Tokens> {
-        const user = await this.usersService.getOneUser(username)
+        const user = await this.usersService.findOne(username)
+        console.log(user)
         if (!user) {
             throw new UnauthorizedException('Incorrect credentials. Check your username or password.')
         }
@@ -49,7 +50,7 @@ export class AuthService {
         try {
             await this.refreshTokenService.verifyAsync(refreshToken)
             const { username } = this.refreshTokenService.decode(refreshToken) as any
-            const user = await this.usersService.getOneUser(username)
+            const user = await this.usersService.findOne(username)
             return await this.generateAccessToken(user)
 
         } catch (errorObject) {

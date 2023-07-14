@@ -14,17 +14,14 @@ export const UserSchema = new mongoose.Schema({
     }
 })
 
-export class User extends mongoose.Document {
+export class User {
+    id: string;
     firstname: string;
     lastname: string;
     age: Number;
     birthday: Date;
     username: string;
     password: string;
-    movies: {
-        liked: string[],
-        watched: string[]
-    }
 }
 
 export enum UserEnum {

@@ -16,7 +16,7 @@ model User {
   lastname  String
   age       Int
   birthday  DateTime
-  username  String
+  username  String   @unique
   password  String
 
   likedMovies   Liked[]

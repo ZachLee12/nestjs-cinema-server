@@ -36,10 +36,6 @@ export class CreateUserDto {
     @Validate(ValidateStrongPassword)
     @IsString()
     password: string;
-
-    @IsNotEmpty()
-    @IsObject()
-    movies: { liked: string[], watched: string[] }
 }
 
 

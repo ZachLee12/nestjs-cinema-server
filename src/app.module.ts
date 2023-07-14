@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './modules/users/users.module';
 import { RefreshTokenModule } from './modules/auth/refresh-token/refresh-token.module';
 import { AccessTokenModule } from './modules/auth/access-token/access-token.module';
+import { GlobalModule } from './global/global.module';
 
 
 @Module({
@@ -16,7 +17,8 @@ import { AccessTokenModule } from './modules/auth/access-token/access-token.modu
     AuthModule,
     UsersModule,
     RefreshTokenModule,
-    AccessTokenModule
+    AccessTokenModule,
+    GlobalModule
   ],
   controllers: [AppController],
   providers: [AppService],
