@@ -11,25 +11,44 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  firstname     String
-  lastname      String
-  age           Int
-  birthday      DateTime
-  username      String
-  password      String
-  likedMovies   Movie[]  @relation("LikedByUsers")
-  watchedMovies Movie[]  @relation("WatchedByUsers")
+  id        String   @id @default(uuid())
+  firstname String
+  lastname  String
+  age       Int
+  birthday  DateTime
+  username  String
+  password  String
+
+  likedMovies   Liked[]
+  watchedMovies Watched[]
 }
 
 model Movie {
-  id             String   @id @default(uuid())
-  name           String   @unique
+  id             String    @id @default(uuid())
+  name           String    @unique
   description    String
   actors         String[]
   showtimes      String[]
   genres         String[]
   imgUrl         String?
-  likedByUsers   User[]   @relation("LikedByUsers")
-  watchedByUsers User[]   @relation("WatchedByUsers")
+  likedByUsers   Liked[]
+  watchedByUsers Watched[]
+}
+
+model Liked {
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  movieId String
+
+  @@id([userId, movieId])
+}
+
+model Watched {
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  movieId String
+
+  @@id([userId, movieId])
 }
