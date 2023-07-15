@@ -21,11 +21,12 @@ model User {
 
   likedMovies   Liked[]
   watchedMovies Watched[]
+  userBooking   UserBooking[]
 }
 
 model Movie {
-  id             String    @id @default(uuid())
-  name           String    @unique
+  id             String        @id @default(uuid())
+  name           String        @unique
   description    String
   actors         String[]
   showtimes      String[]
@@ -33,6 +34,8 @@ model Movie {
   imgUrl         String?
   likedByUsers   Liked[]
   watchedByUsers Watched[]
+  hall           Hall[]
+  userBooking    UserBooking[]
 }
 
 model Liked {
@@ -51,4 +54,28 @@ model Watched {
   movieId String
 
   @@id([userId, movieId])
+}
+
+model Hall {
+  id       String   @id @default(uuid())
+  movie    Movie    @relation(fields: [movieId], references: [id])
+  movieId  String
+  showtime String
+  hallSize HallSize
+}
+
+enum HallSize {
+  BIG
+  MEDIUM
+  SMALL
+}
+
+model UserBooking {
+  id          String @id @default(uuid())
+  user        User   @relation(fields: [userId], references: [id])
+  userId      String
+  movie       Movie  @relation(fields: [movieId], references: [id])
+  movieId     String
+  showtime    String
+  seatsBooked Int[]
 }
