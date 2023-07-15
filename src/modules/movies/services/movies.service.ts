@@ -12,15 +12,15 @@ export class MoviesService {
         private prismaService: PrismaService
     ) { }
 
-    async addMovie(createMovieDto: CreateMovieDto) {
+    async create(createMovieDto: CreateMovieDto) {
 
     }
 
-    async getMovies(): Promise<Movie[]> {
+    async findMany(): Promise<Movie[]> {
         return await this.prismaService.movie.findMany();
     }
 
-    async getOneMovie(id: string): Promise<Movie> {
+    async findUnique(id: string): Promise<Movie> {
         let movie = null;
         try {
             movie = await this.prismaService.movie.findUnique({ where: { id } })
@@ -34,11 +34,11 @@ export class MoviesService {
         return movie
     }
 
-    async deleteMovie(id: string) {
+    async delete(id: string) {
 
     }
 
-    async updateMovie(id: string, updateMovieDto: UpdateMovieDto) {
+    async update(id: string, updateMovieDto: UpdateMovieDto) {
 
     }
 

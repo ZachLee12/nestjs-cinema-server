@@ -17,29 +17,30 @@ export class MoviesController {
         return { message: 'movies endpoint' }
     }
 
+    // returns all movies
     @Get()
-    async getMovies(): Promise<Movie[]> {
-        return this.moviesService.getMovies()
+    async findAll(): Promise<Movie[]> {
+        return this.moviesService.findMany()
     }
 
     @Get(':id')
-    async getOneMovie(@Param('id') id: string): Promise<Movie> {
-        return this.moviesService.getOneMovie(id);
+    async findUnique(@Param('id') id: string): Promise<Movie> {
+        return this.moviesService.findUnique(id);
     }
 
     @Patch(':id')
-    updateMovie(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {
-        return this.moviesService.updateMovie(id, updateMovieDto)
+    update(@Param('id') id: string, @Body() updateMovieDto: UpdateMovieDto) {
+        return this.moviesService.update(id, updateMovieDto)
     }
 
     @Delete(':id')
-    deleteMovie(@Param('id') id: string) {
-        return this.moviesService.deleteMovie(id)
+    delete(@Param('id') id: string) {
+        return this.moviesService.delete(id)
     }
 
     @Post()
-    async addMovie(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto) {
-        const movieAdded = await this.moviesService.addMovie(createMovieDto)
+    async create(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto) {
+        const movieAdded = await this.moviesService.create(createMovieDto)
     }
 
 }
