@@ -65,8 +65,6 @@ model Hall {
   hallSize      HallSize
   numberOfSeats Int
   userBooking   UserBooking[]
-
-  @@unique([showtime, hallSize])
 }
 
 enum HallSize {

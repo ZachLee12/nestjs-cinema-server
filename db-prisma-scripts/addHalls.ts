@@ -15,40 +15,61 @@ const hallSizeByIndex = {
 async function addHall() {
     const movies = await prisma.movie.findMany()
     const showTimes = ["08:00 AM", "10:00 AM", "12:00 PM", "14:00 PM", "16:00 PM", "18:00 PM", "20:00 PM", "22:00 PM", "24:00 PM"]
-    const hallSize = hallSizeByIndex[getRandomInteger(3)]
+    let hallSize = hallSizeByIndex[getRandomInteger(3)]
     let numberOfSeats;
     switch (hallSize) {
         case 'BIG':
             numberOfSeats = 75
+            break;
 
         case 'MEDIUM':
             numberOfSeats = 50
+            break;
 
         case 'SMALL':
             numberOfSeats = 25
+            break;
     }
-
+    let counter = 0
     for await (let movie of movies) {
-        try {
-            await prisma.hall.create({
-                data: {
-                    hallSize: hallSize,
-                    showtime: showTimes[getRandomInteger(showTimes.length)],
-                    movie: {
-                        connect: {
-                            id: movie.id
-                        }
-                    },
-                    numberOfSeats
-                }
-            })
-        } catch (error) {
-            console.log(error)
-            continue
+        console.log(movie.name)
+        for await (let showtime of movie.showtimes) {
+            console.log(showtime)
+            counter += 1
+            try {
+                await prisma.hall.create({
+                    data: {
+                        hallSize: hallSize,
+                        showtime: showtime,
+                        movie: {
+                            connect: {
+                                id: movie.id
+                            }
+                        },
+                        numberOfSeats
+                    }
+                })
+            } catch (error) {
+                continue
+            }
+            hallSize = hallSizeByIndex[getRandomInteger(3)]
+            switch (hallSize) {
+                case 'BIG':
+                    numberOfSeats = 75
+                    break;
+
+                case 'MEDIUM':
+                    numberOfSeats = 50
+                    break;
+
+                case 'SMALL':
+                    numberOfSeats = 25
+                    break;
+            }
         }
     }
     console.log('done')
-
+    console.log(counter)
 }
 
 async function deleteAllHalls() {
@@ -58,5 +79,5 @@ async function deleteAllHalls() {
 function getRandomInteger(limit: number): number {
     return Math.floor(Math.random() * limit);
 }
+deleteAllHalls()
 addHall()
-// deleteAllHalls()

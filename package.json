@@ -8,7 +8,7 @@
   "scripts": {
     "addBookings": "nodemon ./db-prisma-scripts/addBookings.ts",
     "addHalls": "nodemon ./db-prisma-scripts/addHalls.ts",
-    "populateDb": "nodemon ./db-prisma-scripts/populateDb.ts",
+    "addMovies": "nodemon ./db-prisma-scripts/addMovies.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
