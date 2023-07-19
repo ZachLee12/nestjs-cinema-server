@@ -7,8 +7,6 @@ import {
   Param,
   ValidationPipe,
   UseGuards,
-  Request,
-  NotFoundException,
   UsePipes
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';

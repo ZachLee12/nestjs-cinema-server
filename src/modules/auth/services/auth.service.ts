@@ -59,12 +59,12 @@ export class AuthService {
     }
 
     private async generateAccessToken(user: User) {
-        const payload = { sub: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, age: user.age };
+        const payload = { id: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, age: user.age };
         return await this.accessTokenService.signAsync(payload)
     }
 
     private async generateRefreshToken(user: User) {
-        const payload = { sub: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, age: user.age };
+        const payload = { id: user.id, firstname: user.firstname, lastname: user.lastname, username: user.username, age: user.age };
         return await this.refreshTokenService.signAsync(payload)
     }
 }
