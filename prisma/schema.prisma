@@ -25,17 +25,18 @@ model User {
 }
 
 model Movie {
-  id             String        @id @default(uuid())
-  name           String        @unique
-  description    String
-  actors         String[]
-  showtimes      String[]
-  genres         String[]
-  imgUrl         String?
-  likedByUsers   Liked[]
-  watchedByUsers Watched[]
-  hall           Hall[]
-  userBooking    UserBooking[]
+  id               String        @id @default(uuid())
+  name             String        @unique
+  description      String
+  actors           String[]
+  showtimes        String[]
+  genres           String[]
+  imgUrlHorizontal String?
+  imgUrlVertical   String?
+  likedByUsers     Liked[]
+  watchedByUsers   Watched[]
+  hall             Hall[]
+  userBooking      UserBooking[]
 }
 
 model Liked {
@@ -57,11 +58,15 @@ model Watched {
 }
 
 model Hall {
-  id       String   @id @default(uuid())
-  movie    Movie    @relation(fields: [movieId], references: [id])
-  movieId  String
-  showtime String
-  hallSize HallSize
+  id            String        @id @default(uuid())
+  movie         Movie         @relation(fields: [movieId], references: [id])
+  movieId       String
+  showtime      String
+  hallSize      HallSize
+  numberOfSeats Int
+  userBooking   UserBooking[]
+
+  @@unique([showtime, hallSize])
 }
 
 enum HallSize {
@@ -76,6 +81,9 @@ model UserBooking {
   userId      String
   movie       Movie  @relation(fields: [movieId], references: [id])
   movieId     String
-  showtime    String
   seatsBooked Int[]
+  hall        Hall   @relation(fields: [hallId], references: [id])
+  hallId      String
+
+  @@unique([userId, movieId, hallId])
 }

@@ -1,0 +1,27 @@
+LADY BIRD
+vertical: "https://drive.google.com/uc?id=1H5npeXnDU-r7kdAm_uHevvoFun1-Df4S&export=download"
+horizontal: "https://drive.google.com/uc?id=1dTb2XkmLL5xKNeVtV0c4mC3YXpaYI_Ca&export=download"
+
+LOGAN
+vertical: "https://drive.google.com/uc?id=1AtKybsFE_nyCIWInWmfiVNVW66haWIQR&export=download"
+horizontal: "https://drive.google.com/uc?id=14CY1Pq_o1YViG6Thu15B03bMQHY6eneq&export=download"
+
+BLADE RUNNER
+vertical: "https://drive.google.com/uc?id=1E8USBmO7o00sgsdYWmczEzLbyGEPKIfo&export=download"
+horizontal:"https://drive.google.com/uc?id=1zFyf58sGE-bXS28pmLpzy-cc7Bd5nIz6&export=download"
+
+LEAVE NO TRACE
+vertical: "https://drive.google.com/uc?id=1vUpQBSjUTS2fdAdnVLfLjPhgzSe1_XQW&export=download"
+horizontal:"https://drive.google.com/uc?id=17nGIK2QFXgl_jvtyS5Joo89trOC0hHdA&export=download"
+
+GIFTED
+vertical: "https://drive.google.com/uc?id=1IGwCUNqbHMxe-iwMfS7vbs1ma_Scv1e3&export=download"
+horizontal:"https://drive.google.com/uc?id=1E0Ue8xCF6T6IoqTmYSAskP2M9PkBMlZz&export=download"
+
+COCO
+vertical: "https://drive.google.com/uc?id=1HSxcr_60SX9ciUc-83cmVOxw8YMb8-sE&export=download"
+horizontal:"https://drive.google.com/uc?id=1GqpfgSC_hvCh0CHP_6y8IRFUZl6Vx5Ee&export=download"
+
+ELEMENTAL
+vertical: "https://drive.google.com/uc?id=17-37HD0cO0QefIfTptfW-fIue--qFgbT&export=download"
+horizontal:"https://drive.google.com/uc?id=1-eDMG5js0ldwRIbxB_1eFvkZA27-mexq&export=download"

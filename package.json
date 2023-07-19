@@ -6,7 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "populateDb": "nodemon populateDb.ts",
+    "addBookings": "nodemon ./db-prisma-scripts/addBookings.ts",
+    "addHalls": "nodemon ./db-prisma-scripts/addHalls.ts",
+    "populateDb": "nodemon ./db-prisma-scripts/populateDb.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

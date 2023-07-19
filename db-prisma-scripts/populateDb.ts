@@ -1,18 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-async function createLiked() {
-    const movie = await prisma.movie.findUnique({ where: { name: "Gifted" }, include: { likedByUsers: true } })
-
-    const likedByUsers = movie.likedByUsers.map(liked => liked.userId)
-
-    const users = await prisma.user.findMany({
-        where: {
-            id: { in: likedByUsers }
-        }
-    })
-    console.log(users)
-}
 
 async function deleteMovie() {
     await prisma.movie.deleteMany();
@@ -26,7 +14,7 @@ async function createMovie() {
             actors: ['Ryan Gosling', 'Hugh Jackman', 'Ryan Reynolds'],
             genres: ['Action', 'Thriller'],
             showtimes: ['08:00 AM', '09:00 AM', '12:00 PM', '13:00 PM', '15:00 PM', '20:00 PM'],
-            imgUrl: "https://drive.google.com/uc?id=1AtKybsFE_nyCIWInWmfiVNVW66haWIQR&export=download"
+            // imgUrl: "https://drive.google.com/uc?id=1AtKybsFE_nyCIWInWmfiVNVW66haWIQR&export=download"
         }
     })
     console.log(movie)
