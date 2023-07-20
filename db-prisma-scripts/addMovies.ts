@@ -8,7 +8,7 @@ async function deleteMovie() {
     await prisma.movie.deleteMany();
 }
 
-async function createMovie() {
+async function addMovies() {
     movieData.forEach(async (movie) => {
         await prisma.movie.create({
             data: {
@@ -19,9 +19,22 @@ async function createMovie() {
     console.log('done')
 }
 
-deleteMovie()
+async function updateMovie() {
+    await prisma.movie.update({
+        where: {
+            name: 'Leave No Trace'
+        },
+        data: {
+            imgUrlHorizontal: 'https://drive.google.com/uc?id=1C4osOOTCxaCgQV3kTt5TxJZQ68j76MXE&export=download'
+        }
+    })
+    console.log('done');
+}
+
+// updateMovie()
+// deleteMovie()
 // createLiked();
-createMovie()
+// addMovies()
 
 
 

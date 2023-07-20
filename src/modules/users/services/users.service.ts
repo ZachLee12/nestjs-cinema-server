@@ -9,7 +9,7 @@ export class UsersService {
         private prismaService: PrismaService
     ) { }
 
-    async getUsers(): Promise<any> {
+    async getUsers(): Promise<User[]> {
         return await this.prismaService.user.findMany();
     }
 
@@ -29,7 +29,7 @@ export class UsersService {
         }
     }
 
-    async findOne(username: string) {
+    async findOne(username: string): Promise<User> {
         const user = await this.prismaService.user.findUnique({
             where: {
                 username
@@ -38,7 +38,7 @@ export class UsersService {
         return user
     }
 
-    async deleteOne(id: string) {
+    async deleteOne(id: string): Promise<User> {
         const user = await this.prismaService.user.delete(
             {
                 where: {

@@ -35,49 +35,51 @@ async function addHall() {
         console.log(movie.name)
         for await (let showtime of movie.showtimes) {
             console.log(showtime)
-            counter += 1
-            try {
-                await prisma.hall.create({
-                    data: {
-                        hallSize: hallSize,
-                        showtime: showtime,
-                        movie: {
-                            connect: {
-                                id: movie.id
-                            }
-                        },
-                        numberOfSeats
-                    }
-                })
-            } catch (error) {
-                continue
-            }
-            hallSize = hallSizeByIndex[getRandomInteger(3)]
-            switch (hallSize) {
-                case 'BIG':
-                    numberOfSeats = 75
-                    break;
+            for (let i = 0; i < getRandomInteger(6); i++) {
+                try {
+                    await prisma.hall.create({
+                        data: {
+                            hallSize: hallSize,
+                            showtime: showtime,
+                            movie: {
+                                connect: {
+                                    id: movie.id
+                                }
+                            },
+                            numberOfSeats
+                        }
+                    })
+                } catch (error) {
+                    continue
+                }
+                hallSize = hallSizeByIndex[getRandomInteger(3)]
+                switch (hallSize) {
+                    case 'BIG':
+                        numberOfSeats = 75
+                        break;
 
-                case 'MEDIUM':
-                    numberOfSeats = 50
-                    break;
+                    case 'MEDIUM':
+                        numberOfSeats = 50
+                        break;
 
-                case 'SMALL':
-                    numberOfSeats = 25
-                    break;
+                    case 'SMALL':
+                        numberOfSeats = 25
+                        break;
+                }
+
             }
         }
     }
     console.log('done')
-    console.log(counter)
 }
 
 async function deleteAllHalls() {
     await prisma.hall.deleteMany()
+    console.log('done')
 }
 
 function getRandomInteger(limit: number): number {
     return Math.floor(Math.random() * limit);
 }
-deleteAllHalls()
-addHall()
+// deleteAllHalls()
+// addHall()

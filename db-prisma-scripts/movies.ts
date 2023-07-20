@@ -60,7 +60,7 @@ export const movieData = [
         genres: ['Drama', 'Adventure'],
         showtimes: ['08:30 AM', '10:30 AM', '11:40 AM', '14:00 PM', '15:30 PM', '16:00 PM', '20:00 PM'],
         imgUrlVertical: "https://drive.google.com/uc?id=1vUpQBSjUTS2fdAdnVLfLjPhgzSe1_XQW&export=download",
-        imgUrlHorizontal: "https://drive.google.com/uc?id=17nGIK2QFXgl_jvtyS5Joo89trOC0hHdA&export=download"
+        imgUrlHorizontal: "https://drive.google.com/uc?id=1C4osOOTCxaCgQV3kTt5TxJZQ68j76MXE&export=download"
     },
 
 ]

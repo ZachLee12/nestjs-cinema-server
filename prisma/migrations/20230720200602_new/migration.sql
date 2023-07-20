@@ -73,7 +73,7 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 CREATE UNIQUE INDEX "Movie_name_key" ON "Movie"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Hall_showtime_hallSize_key" ON "Hall"("showtime", "hallSize");
+CREATE UNIQUE INDEX "Hall_movieId_hallSize_showtime_key" ON "Hall"("movieId", "hallSize", "showtime");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "UserBooking_userId_movieId_hallId_key" ON "UserBooking"("userId", "movieId", "hallId");

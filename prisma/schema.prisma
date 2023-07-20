@@ -65,6 +65,8 @@ model Hall {
   hallSize      HallSize
   numberOfSeats Int
   userBooking   UserBooking[]
+
+  @@unique([movieId, hallSize, showtime])
 }
 
 enum HallSize {
