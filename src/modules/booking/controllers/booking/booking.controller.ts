@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Query, Post, Body } from '@nestjs/common';
 import { BookingService } from '../../services/booking/booking.service';
+import { CreateUserBookingDto } from '../../dto/createUserBooking-dto';
 
 @Controller('booking')
 export class BookingController {
@@ -9,13 +10,19 @@ export class BookingController {
     ) { }
 
     @Get('hall/:movieId/:showtime')
-    async getHall(@Param('movieId') movieId: string, @Param('showtime') showtime: string) {
+    async getHalls(@Param('movieId') movieId: string, @Param('showtime') showtime: string) {
         return await this.bookingService.getHalls(movieId, showtime)
     }
 
+    @Post('hall')
+    async getHallById(@Body() hallDto: any) {
+        const { hallId } = hallDto
+        return await this.bookingService.getHallUnique(hallId);
+    }
+
     @Post()
-    async createUserBooking(@Body() userBookingDto: any) {
-        console.log(userBookingDto)
+    async createUserBooking(@Body() userBookingDto: CreateUserBookingDto[]) {
+        return await this.bookingService.createUserBooking(userBookingDto)
     }
 
 }

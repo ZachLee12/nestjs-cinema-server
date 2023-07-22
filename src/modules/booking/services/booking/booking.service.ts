@@ -20,7 +20,8 @@ export class BookingService {
         return halls
     }
 
-    async createUserBooking(hallId: string, movieId: string, userId: string, seatsBooked: {}[]) {
+    async createUserBooking(userBookingDto: any) {
+        const { hallId, movieId, userId, seatsBooked } = userBookingDto
         const userBooking = await this.prisma.userBooking.create(
             {
                 data: {
@@ -32,6 +33,16 @@ export class BookingService {
             }
         )
         return userBooking
+    }
+
+    async getHallUnique(hallId: string) {
+        const hall = await this.prisma.hall.findUnique(
+            {
+                where: { id: hallId }
+            }
+        );
+
+        return hall
     }
 
 }
