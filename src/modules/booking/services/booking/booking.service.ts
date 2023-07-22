@@ -17,8 +17,21 @@ export class BookingService {
                 showtime
             }
         })
-
         return halls
+    }
+
+    async createUserBooking(hallId: string, movieId: string, userId: string, seatsBooked: {}[]) {
+        const userBooking = await this.prisma.userBooking.create(
+            {
+                data: {
+                    hallId,
+                    movieId,
+                    userId,
+                    seatsBooked
+                }
+            }
+        )
+        return userBooking
     }
 
 }

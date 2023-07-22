@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "addBookings": "nodemon ./db-prisma-scripts/addBookings.ts",
+    "addUserBookings": "nodemon ./db-prisma-scripts/addUserBookings.ts",
     "addHalls": "nodemon ./db-prisma-scripts/addHalls.ts",
     "addMovies": "nodemon ./db-prisma-scripts/addMovies.ts",
     "build": "nest build",

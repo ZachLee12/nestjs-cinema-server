@@ -81,9 +81,9 @@ model UserBooking {
   userId      String
   movie       Movie  @relation(fields: [movieId], references: [id])
   movieId     String
-  seatsBooked Json[]
   hall        Hall   @relation(fields: [hallId], references: [id])
   hallId      String
+  seatsBooked Json[]
 
-  @@unique([userId, movieId, hallId])
+  @@unique([userId, hallId, seatsBooked])
 }
