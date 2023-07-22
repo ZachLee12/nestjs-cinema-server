@@ -82,4 +82,4 @@ function getRandomInteger(limit: number): number {
     return Math.floor(Math.random() * limit);
 }
 // deleteAllHalls()
-// addHall()
+addHall()
