@@ -9,20 +9,19 @@ export class BookingController {
         private bookingService: BookingService
     ) { }
 
-    @Get('hall/:movieId/:showtime')
-    async getHalls(@Param('movieId') movieId: string, @Param('showtime') showtime: string) {
-        return await this.bookingService.getHalls(movieId, showtime)
-    }
-
-    @Post('hall')
-    async getHallById(@Body() hallDto: any) {
-        const { hallId } = hallDto
-        return await this.bookingService.getHallUnique(hallId);
-    }
-
     @Post()
     async createUserBooking(@Body() userBookingDto: CreateUserBookingDto[]) {
         return await this.bookingService.createUserBooking(userBookingDto)
+    }
+
+    @Get('hall/:hallId')
+    async getOneHall(@Param('hallId') hallId: any) {
+        return await this.bookingService.getOneHall(hallId);
+    }
+
+    @Get('hall/:movieId/:showtime')
+    async getAllHalls(@Param('movieId') movieId: string, @Param('showtime') showtime: string) {
+        return await this.bookingService.getAllHalls(movieId, showtime)
     }
 
 }

@@ -10,7 +10,7 @@ export class BookingService {
     ) { }
 
 
-    async getHalls(movieId: string, showtime: string): Promise<Hall[]> {
+    async getAllHalls(movieId: string, showtime: string): Promise<Hall[]> {
         const halls = await this.prisma.hall.findMany({
             where: {
                 movieId,
@@ -35,13 +35,12 @@ export class BookingService {
         return userBooking
     }
 
-    async getHallUnique(hallId: string) {
+    async getOneHall(hallId: string) {
         const hall = await this.prisma.hall.findUnique(
             {
                 where: { id: hallId }
             }
         );
-
         return hall
     }
 
