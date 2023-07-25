@@ -9,13 +9,15 @@ export class BookingController {
         private bookingService: BookingService
     ) { }
 
+    //userBooking
     @Post()
     async createUserBooking(@Body() userBookingDto: CreateUserBookingDto[]) {
         return await this.bookingService.createUserBooking(userBookingDto)
     }
 
+    //hall
     @Get('hall/:hallId')
-    async getOneHall(@Param('hallId') hallId: any) {
+    async getOneHall(@Param('hallId') hallId: string) {
         return await this.bookingService.getOneHall(hallId);
     }
 

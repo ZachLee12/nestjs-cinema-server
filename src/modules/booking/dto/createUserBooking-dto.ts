@@ -6,6 +6,12 @@ import {
     IsNotEmpty,
 } from 'class-validator'
 
+export interface SeatBookedObject {
+    rowId: number,
+    columnId: number,
+    selected: boolean //remove this in the future PLEASE
+}
+
 export class CreateUserBookingDto {
     @IsNotEmpty()
     @IsString()
@@ -20,5 +26,5 @@ export class CreateUserBookingDto {
     movieId: string
 
     @ArrayNotEmpty()
-    seatsBooked: {}[]
+    seatsBooked: SeatBookedObject[]
 }
