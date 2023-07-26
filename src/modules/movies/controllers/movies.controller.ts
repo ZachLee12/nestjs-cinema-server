@@ -20,7 +20,7 @@ export class MoviesController {
     // returns all movies
     @Get()
     async findAll(): Promise<Movie[]> {
-        return this.moviesService.findMany()
+        return this.moviesService.findAll()
     }
 
     @Get(':id')

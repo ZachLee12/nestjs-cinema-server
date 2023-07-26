@@ -1,0 +1,17 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CreateMovieDto {
+  name: String!
+  description: String!
+  actors: [String!]!
+  showtimes: [String!]!
+  genres: [String!]!
+  imgUrlHorizontal: String!
+  imgUrlVertical: String!
+}
+
+type Query {
+  movies: [CreateMovieDto!]!
+}

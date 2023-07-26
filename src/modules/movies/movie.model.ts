@@ -12,14 +12,14 @@ export const MovieSchema = new mongoose.Schema({
     imgUrl: { type: String, required: true }
 })
 
-export type PlayTime = `${number}${number}:${number}${number} ${'AM' | 'PM'}`
+export type Showtime = `${number}${number}:${number}${number} ${'AM' | 'PM'}`
 
 export class Movie {
     id: string;
     name: string;
     description: string;
     actors: string[];
-    playtimes: PlayTime[];
+    playtimes: Showtime[];
     genres: string[];
     imgUrl: string;
 }

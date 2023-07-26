@@ -1,4 +1,5 @@
-import { PlayTime } from "../movie.model";
+import { Field, ObjectType } from "@nestjs/graphql";
+import { Showtime } from "../movie.model";
 import {
     MinLength,
     ValidatorConstraint,
@@ -8,10 +9,11 @@ import {
     Validate,
     IsString,
     IsNotEmpty,
+    IsOptional,
 } from 'class-validator'
 
-@ValidatorConstraint({ name: 'ValidatePlaytimeRegex', async: false })
-class ValidatePlaytimeRegex implements ValidatorConstraintInterface {
+@ValidatorConstraint({ name: 'ValidateShowtimeRegex', async: false })
+class ValidateShowtimeRegex implements ValidatorConstraintInterface {
     validate(text: string, args: ValidationArguments) {
         let regex = /^[0-9][0-9]:[0-9][0-9] \b(?:AM|PM)\b$/
         return regex.test(text) // for async validations you must return a Promise<boolean> here
@@ -23,24 +25,53 @@ class ValidatePlaytimeRegex implements ValidatorConstraintInterface {
     }
 }
 
+@ObjectType()
 export class CreateMovieDto {
+    @Field()
     @MinLength(2)
     name: string;
 
+    @Field()
     @MinLength(5)
     description: string;
 
+    @Field(() => [String])
     @IsString({ each: true })
     @MinLength(1, { each: true })
     actors: string[];
 
+    @Field(() => [String])
     @ArrayNotEmpty()
-    @Validate(ValidatePlaytimeRegex, { each: true })
-    playtimes: PlayTime[];
+    @Validate(ValidateShowtimeRegex, { each: true })
+    showtimes: Showtime[];
+
+    @Field(() => [String])
     genres: string[];
 
+    @Field()
     @IsString()
     @IsNotEmpty()
-    imgUrl: string;
+    @IsOptional()
+    imgUrlHorizontal: string;
+
+    @Field()
+    @IsString()
+    @IsNotEmpty()
+    @IsOptional()
+    imgUrlVertical: string
+
 }
+
+// id               String        @id @default(uuid())
+// name             String        @unique
+// description      String
+// actors           String[]
+// showtimes        String[]
+// genres           String[]
+// imgUrlHorizontal String?
+// imgUrlVertical   String?
+// likedByUsers     Liked[]
+// watchedByUsers   Watched[]
+// hall             Hall[]
+// userBooking      UserBooking[]
 

@@ -16,7 +16,7 @@ export class MoviesService {
 
     }
 
-    async findMany(): Promise<Movie[]> {
+    async findAll(): Promise<Movie[]> {
         return await this.prismaService.movie.findMany();
     }
 
