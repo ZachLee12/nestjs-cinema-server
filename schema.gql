@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type CreateMovieDto {
+  id: String!
   name: String!
   description: String!
   actors: [String!]!
@@ -12,6 +13,22 @@ type CreateMovieDto {
   imgUrlVertical: String!
 }
 
+type SeatBookedObject {
+  rowId: Float!
+  columnId: Float!
+  selected: Boolean!
+}
+
+type CreateUserBookingDto {
+  id: ID!
+  hallId: ID!
+  userId: ID!
+  movie: CreateMovieDto!
+  movieId: ID!
+  seatsBooked: [SeatBookedObject!]!
+}
+
 type Query {
   movies: [CreateMovieDto!]!
+  userBookings: [CreateUserBookingDto!]!
 }

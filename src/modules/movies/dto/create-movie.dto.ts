@@ -28,6 +28,9 @@ class ValidateShowtimeRegex implements ValidatorConstraintInterface {
 @ObjectType()
 export class CreateMovieDto {
     @Field()
+    id: string;
+
+    @Field()
     @MinLength(2)
     name: string;
 

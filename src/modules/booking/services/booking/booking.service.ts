@@ -34,6 +34,13 @@ export class BookingService {
         return userBooking
     }
 
+    async findAllUserBookings() {
+        const userBookings = await this.prisma.userBooking.findMany()
+        return userBookings
+    }
+
+
+
     async getOneHall(hallId: string) {
         const hall = await this.prisma.hall.findUnique(
             {
