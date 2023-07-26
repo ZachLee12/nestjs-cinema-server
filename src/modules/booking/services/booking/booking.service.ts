@@ -4,7 +4,6 @@ import { PrismaService } from 'src/global/prisma.service';
 
 @Injectable()
 export class BookingService {
-
     constructor(
         private prisma: PrismaService
     ) { }
