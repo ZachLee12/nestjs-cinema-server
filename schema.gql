@@ -28,7 +28,18 @@ type CreateUserBookingDto {
   seatsBooked: [SeatBookedObject!]!
 }
 
+type HallDto {
+  id: String!
+  movie: CreateMovieDto!
+  movieId: String!
+  showtime: String!
+  hallSize: String!
+  numberOfSeats: Float!
+  userBooking: [CreateUserBookingDto!]
+}
+
 type Query {
   movies: [CreateMovieDto!]!
   userBookings: [CreateUserBookingDto!]!
+  halls(movieId: String!, showtime: String!): [HallDto!]!
 }

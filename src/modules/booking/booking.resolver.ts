@@ -16,8 +16,9 @@ export class BookingResolver {
         return this.bookingService.findAllUserBookings()
     }
 
-    @ResolveField('movie', returns => CreateMovieDto)
-    async getUserBookingMovie(@Parent() userBooking: CreateUserBookingDto) {
+    @ResolveField('movie', () => CreateMovieDto)
+    async userBookingMovieResolver(@Parent() userBooking: CreateUserBookingDto) {
         return this.moviesService.findUnique(userBooking.movieId)
     }
+
 }

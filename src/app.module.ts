@@ -11,6 +11,7 @@ import { BookingModule } from './modules/booking/booking.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloDriver } from '@nestjs/apollo/dist/drivers';
+import { HallModule } from './modules/hall/hall.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ApolloDriver } from '@nestjs/apollo/dist/drivers';
     AccessTokenModule,
     BookingModule,
     GlobalModule,
+    HallModule,
   ],
   controllers: [AppController],
   providers: [AppService],
