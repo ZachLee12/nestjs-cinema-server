@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Hall } from '@prisma/client';
+import { Hall, UserBooking } from '@prisma/client';
 import { PrismaService } from 'src/global/prisma.service';
 
 @Injectable()
@@ -29,6 +29,14 @@ export class BookingService {
         return userBookings
     }
 
-
+    async findAllUserBookingsWithMovieId(movieId: string): Promise<UserBooking[]> {
+        return await this.prisma.userBooking.findMany(
+            {
+                where: {
+                    movieId
+                }
+            }
+        )
+    }
 
 }

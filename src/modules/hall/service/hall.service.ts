@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Hall } from '@prisma/client';
+import { Hall as PrismaHall } from '@prisma/client';
 import { PrismaService } from 'src/global/prisma.service';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class HallService {
         private prisma: PrismaService
     ) { }
 
-    async findOneHall(hallId: string) {
+    async findOneHall(hallId: string): Promise<PrismaHall> {
         const hall = await this.prisma.hall.findUnique(
             {
                 where: { id: hallId }
@@ -17,7 +17,7 @@ export class HallService {
         return hall
     }
 
-    async findHalls(movieId: string, showtime: string): Promise<Hall[]> {
+    async findHalls(movieId: string, showtime: string): Promise<PrismaHall[]> {
         const halls = await this.prisma.hall.findMany({
             where: {
                 movieId,

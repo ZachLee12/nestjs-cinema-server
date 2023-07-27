@@ -2,17 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CreateMovieDto {
-  id: String!
-  name: String!
-  description: String!
-  actors: [String!]!
-  showtimes: [String!]!
-  genres: [String!]!
-  imgUrlHorizontal: String!
-  imgUrlVertical: String!
-}
-
 type SeatBookedObject {
   rowId: Float!
   columnId: Float!
@@ -26,6 +15,19 @@ type CreateUserBookingDto {
   movie: CreateMovieDto!
   movieId: ID!
   seatsBooked: [SeatBookedObject!]!
+}
+
+type CreateMovieDto {
+  id: String!
+  name: String!
+  description: String!
+  actors: [String!]!
+  showtimes: [String!]!
+  genres: [String!]!
+  imgUrlHorizontal: String!
+  imgUrlVertical: String!
+  userBookings: [CreateUserBookingDto!]
+  resolveUserBooking: [CreateUserBookingDto!]!
 }
 
 type HallDto {

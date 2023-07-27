@@ -1,11 +1,14 @@
-import { Resolver, Query } from '@nestjs/graphql'
+import { Resolver, Query, ResolveField, Parent } from '@nestjs/graphql'
 import { MoviesService } from './services/movies.service'
 import { CreateMovieDto } from './dto/create-movie.dto'
+import { CreateUserBookingDto } from '../booking/dto/createUserBooking-dto'
+import { BookingService } from '../booking/services/booking/booking.service'
 
 @Resolver(() => CreateMovieDto)
 export class MoviesResolver {
     constructor(
-        private moviesService: MoviesService
+        private moviesService: MoviesService,
+        private bookingService: BookingService
     ) { }
 
     @Query(() => [CreateMovieDto])
@@ -13,5 +16,8 @@ export class MoviesResolver {
         return this.moviesService.findAll()
     }
 
-
+    @ResolveField(() => [CreateUserBookingDto])
+    async resolveUserBooking(@Parent() movie: CreateMovieDto) {
+        return this.bookingService.findAllUserBookingsWithMovieId(movie.id)
+    }
 }
