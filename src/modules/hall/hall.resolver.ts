@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql'
-import { HallDto } from './dto/Hall-dto'
+import { HallDto } from './dto/Hall.dto'
 import { HallService } from './service/hall.service'
-import { CreateMovieDto } from '../movies/dto/create-movie.dto'
+import { MovieDto } from '../movies/dto/Movie.dto'
 import { MoviesService } from '../movies/services/movies.service'
 
 @Resolver(() => HallDto)
@@ -16,7 +16,7 @@ export class HallResolver {
         return this.hallService.findHalls(movieId, showtime)
     }
 
-    @ResolveField('movie', () => CreateMovieDto)
+    @ResolveField('movie', () => MovieDto)
     async resolveMovieField(@Parent() hall: HallDto) {
         return this.moviesService.findUnique(hall.movieId)
     }

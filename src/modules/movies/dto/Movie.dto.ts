@@ -11,7 +11,6 @@ import {
     IsNotEmpty,
     IsOptional,
 } from 'class-validator'
-import { CreateUserBookingDto } from "src/modules/booking/dto/createUserBooking-dto";
 
 @ValidatorConstraint({ name: 'ValidateShowtimeRegex', async: false })
 class ValidateShowtimeRegex implements ValidatorConstraintInterface {
@@ -27,7 +26,7 @@ class ValidateShowtimeRegex implements ValidatorConstraintInterface {
 }
 
 @ObjectType()
-export class CreateMovieDto {
+export class MovieDto {
     @Field()
     id: string;
 
@@ -64,17 +63,4 @@ export class CreateMovieDto {
     @IsOptional()
     imgUrlVertical: string
 }
-
-// id               String        @id @default(uuid())
-// name             String        @unique
-// description      String
-// actors           String[]
-// showtimes        String[]
-// genres           String[]
-// imgUrlHorizontal String?
-// imgUrlVertical   String?
-// likedByUsers     Liked[]
-// watchedByUsers   Watched[]
-// hall             Hall[]
-// userBooking      UserBooking[]
 

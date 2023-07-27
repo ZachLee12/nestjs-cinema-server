@@ -1,10 +1,8 @@
 import { Injectable, HttpException, HttpStatus, NotFoundException, BadRequestException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose'
-import { Model } from 'mongoose';
-import { CreateMovieDto } from '../dto/create-movie.dto';
+import { MovieDto } from '../dto/Movie.dto';
 import { UpdateMovieDto } from '../dto/update-movie.dto';
 import { PrismaService } from 'src/global/prisma.service';
-import { Movie } from '@prisma/client';
+import { Movie as PrismaMovie } from '@prisma/client';
 
 @Injectable()
 export class MoviesService {
@@ -12,15 +10,15 @@ export class MoviesService {
         private prismaService: PrismaService
     ) { }
 
-    async create(createMovieDto: CreateMovieDto) {
+    async create(movieDto: MovieDto) {
 
     }
 
-    async findAll(): Promise<Movie[]> {
+    async findAll(): Promise<PrismaMovie[]> {
         return await this.prismaService.movie.findMany();
     }
 
-    async findUnique(id: string): Promise<Movie> {
+    async findUnique(id: string): Promise<PrismaMovie> {
         let movie = null;
         try {
             movie = await this.prismaService.movie.findUnique({ where: { id } })

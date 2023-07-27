@@ -1,6 +1,6 @@
-import { CreateMovieDto } from "./create-movie.dto";
+import { MovieDto } from "./Movie.dto";
 import { PartialType } from "@nestjs/mapped-types";
 
-export class UpdateMovieDto extends PartialType(CreateMovieDto) {
+export class UpdateMovieDto extends PartialType(MovieDto) {
 
 }

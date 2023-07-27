@@ -10,7 +10,7 @@ import {
   UsePipes
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { UserDto } from '../dto/User.dto';
 import { AuthGuard } from '../../auth/guards/auth/auth.guard';
 import { EncryptionPipe } from '../pipes/encryption/encryption.pipe';
 
@@ -28,20 +28,20 @@ export class UsersController {
   @Get()
   @UseGuards(AuthGuard)
   getUsers() {
-    return this.usersService.getUsers()
+    return this.usersService.findAllUsers()
   }
 
   @Get(':username')
   @UseGuards(AuthGuard)
   getOneUser(@Param('username') username: string) {
-    return this.usersService.findOne(username)
+    return this.usersService.findOneUser(username)
   }
 
   @Post()
   @UsePipes(new ValidationPipe(), new EncryptionPipe())
-  async addUser(@Body() createUserDto: CreateUserDto): Promise<{ message: string } | Error> {
+  async addUser(@Body() userDto: UserDto): Promise<{ message: string } | Error> {
     try {
-      const user = await this.usersService.create(createUserDto)
+      const user = await this.usersService.create(userDto)
       return { message: `user [${user.id}] created` }
     } catch (err) {
       throw err

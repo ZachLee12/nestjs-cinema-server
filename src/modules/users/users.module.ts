@@ -3,6 +3,7 @@ import { UsersService } from './services/users.service';
 import { UsersController } from './controllers/users.controller';
 import { AccessTokenModule } from '../auth/access-token/access-token.module';
 import { RefreshTokenModule } from '../auth/refresh-token/refresh-token.module';
+import { UsersResolver } from './users.resolver';
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { RefreshTokenModule } from '../auth/refresh-token/refresh-token.module';
     RefreshTokenModule
   ],
   controllers: [UsersController],
-  providers: [UsersService],
+  providers: [UsersService, UsersResolver],
   exports: [UsersService]
 })
 export class UsersModule { }

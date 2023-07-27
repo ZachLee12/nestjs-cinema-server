@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { UserDto } from '../dto/User.dto';
 import { PrismaService } from 'src/global/prisma.service';
-import { User } from '@prisma/client';
+import { User as PrismaUser } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -9,12 +9,12 @@ export class UsersService {
         private prismaService: PrismaService
     ) { }
 
-    async getUsers(): Promise<User[]> {
+    async findAllUsers(): Promise<PrismaUser[]> {
         return await this.prismaService.user.findMany();
     }
 
-    async create(createUserDto: CreateUserDto): Promise<User> {
-        if (await this.findOne(createUserDto.username)) {
+    async create(createUserDto: UserDto): Promise<PrismaUser> {
+        if (await this.findOneUser(createUserDto.username)) {
             throw new BadRequestException('Username already taken.')
         }
         try {
@@ -29,7 +29,7 @@ export class UsersService {
         }
     }
 
-    async findOne(username: string): Promise<User> {
+    async findOneUser(username: string): Promise<PrismaUser> {
         const user = await this.prismaService.user.findUnique({
             where: {
                 username
@@ -38,7 +38,7 @@ export class UsersService {
         return user
     }
 
-    async deleteOne(id: string): Promise<User> {
+    async deleteOne(id: string): Promise<PrismaUser> {
         const user = await this.prismaService.user.delete(
             {
                 where: {
@@ -46,7 +46,6 @@ export class UsersService {
                 }
             }
         )
-
         return user
     }
 

@@ -1,5 +1,5 @@
-import { CreateMovieDto } from "src/modules/movies/dto/create-movie.dto"
-import { CreateUserBookingDto } from "../../booking/dto/createUserBooking-dto"
+import { MovieDto } from "src/modules/movies/dto/Movie.dto"
+import { UserBookingDto } from "../../booking/dto/UserBooking.dto"
 import { ObjectType, Field } from "@nestjs/graphql"
 
 @ObjectType()
@@ -7,8 +7,8 @@ export class HallDto{
     @Field()
     id: string
 
-    @Field(()=> CreateMovieDto)
-    movie: CreateMovieDto
+    @Field(()=> MovieDto)
+    movie: MovieDto
 
     @Field()
     movieId: string
@@ -22,8 +22,8 @@ export class HallDto{
     @Field()
     numberOfSeats: number
 
-    @Field(() => [CreateUserBookingDto], {nullable:true})
-    userBooking: CreateUserBookingDto[]
+    @Field(() => [UserBookingDto], {nullable:true})
+    userBooking: UserBookingDto[]
 }
 
 // model Hall {

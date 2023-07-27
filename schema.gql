@@ -2,22 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type SeatBookedObject {
-  rowId: Float!
-  columnId: Float!
-  selected: Boolean!
+type UserDto {
+  firstname: String!
+  lastname: String!
+  age: Int!
+  birthday: String!
+  username: String!
+  password: String!
 }
 
-type CreateUserBookingDto {
-  id: ID!
-  hallId: ID!
-  userId: ID!
-  movie: CreateMovieDto!
-  movieId: ID!
-  seatsBooked: [SeatBookedObject!]!
-}
-
-type CreateMovieDto {
+type MovieDto {
   id: String!
   name: String!
   description: String!
@@ -26,22 +20,37 @@ type CreateMovieDto {
   genres: [String!]!
   imgUrlHorizontal: String!
   imgUrlVertical: String!
-  userBookings: [CreateUserBookingDto!]
-  resolveUserBooking: [CreateUserBookingDto!]!
+  resolveUserBooking: [UserBookingDto!]!
+}
+
+type SeatBookedObject {
+  rowId: Float!
+  columnId: Float!
+  selected: Boolean!
+}
+
+type UserBookingDto {
+  id: ID!
+  hallId: ID!
+  userId: ID!
+  movie: MovieDto!
+  movieId: ID!
+  seatsBooked: [SeatBookedObject!]!
 }
 
 type HallDto {
   id: String!
-  movie: CreateMovieDto!
+  movie: MovieDto!
   movieId: String!
   showtime: String!
   hallSize: String!
   numberOfSeats: Float!
-  userBooking: [CreateUserBookingDto!]
+  userBooking: [UserBookingDto!]
 }
 
 type Query {
-  movies: [CreateMovieDto!]!
-  userBookings: [CreateUserBookingDto!]!
+  movies: [MovieDto!]!
+  users: [UserDto!]!
+  userBookings: [UserBookingDto!]!
   halls(movieId: String!, showtime: String!): [HallDto!]!
 }

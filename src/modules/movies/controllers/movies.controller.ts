@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Put, Patch, Delete, ValidationPipe, Param } from '@nestjs/common';
 import { MoviesService } from '../services/movies.service';
 import { Movie } from '@prisma/client';
-import { CreateMovieDto } from '../dto/create-movie.dto';
+import { MovieDto } from '../dto/Movie.dto';
 import { UpdateMovieDto } from '../dto/update-movie.dto';
 
 
@@ -39,8 +39,8 @@ export class MoviesController {
     }
 
     @Post()
-    async create(@Body(new ValidationPipe()) createMovieDto: CreateMovieDto) {
-        const movieAdded = await this.moviesService.create(createMovieDto)
+    async create(@Body(new ValidationPipe()) movieDto: MovieDto) {
+        const movieAdded = await this.moviesService.create(movieDto)
     }
 
 }

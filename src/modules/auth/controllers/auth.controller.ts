@@ -11,7 +11,6 @@ import {
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../interfaces';
 import { ApiBody, ApiProperty } from '@nestjs/swagger';
-import { CreateUserDto } from 'src/modules/users/dto/create-user.dto';
 
 class Credentials {
     @ApiProperty()

@@ -6,7 +6,7 @@ import {
     IsString,
     IsNotEmpty,
 } from 'class-validator'
-import { CreateMovieDto } from 'src/modules/movies/dto/create-movie.dto'
+import { MovieDto } from 'src/modules/movies/dto/Movie.dto'
 
 @ObjectType()
 export class SeatBookedObject {
@@ -19,7 +19,7 @@ export class SeatBookedObject {
 }
 
 @ObjectType()
-export class CreateUserBookingDto {
+export class UserBookingDto {
 
     @Field(type => ID)
     id: string
@@ -34,8 +34,8 @@ export class CreateUserBookingDto {
     @IsString()
     userId: string
 
-    @Field(type => CreateMovieDto)
-    movie: CreateMovieDto
+    @Field(type => MovieDto)
+    movie: MovieDto
 
     @Field(type => ID)
     @IsNotEmpty()
