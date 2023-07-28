@@ -6,6 +6,7 @@ import {
     IsString,
     IsNotEmpty,
 } from 'class-validator'
+import { HallDto } from 'src/modules/hall/dto/Hall.dto'
 import { MovieDto } from 'src/modules/movies/dto/Movie.dto'
 
 @ObjectType()
@@ -28,6 +29,9 @@ export class UserBookingDto {
     @IsNotEmpty()
     @IsString()
     hallId: string
+
+    @Field(type => HallDto)
+    hall: HallDto
 
     @Field(type => ID)
     @IsNotEmpty()

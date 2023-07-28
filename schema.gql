@@ -23,6 +23,16 @@ type MovieDto {
   resolveUserBooking: [UserBookingDto!]!
 }
 
+type HallDto {
+  id: String!
+  movie: MovieDto!
+  movieId: String!
+  showtime: String!
+  hallSize: String!
+  numberOfSeats: Float!
+  userBooking: [UserBookingDto!]
+}
+
 type SeatBookedObject {
   rowId: Float!
   columnId: Float!
@@ -32,20 +42,11 @@ type SeatBookedObject {
 type UserBookingDto {
   id: ID!
   hallId: ID!
+  hall: HallDto!
   userId: ID!
   movie: MovieDto!
   movieId: ID!
   seatsBooked: [SeatBookedObject!]!
-}
-
-type HallDto {
-  id: String!
-  movie: MovieDto!
-  movieId: String!
-  showtime: String!
-  hallSize: String!
-  numberOfSeats: Float!
-  userBooking: [UserBookingDto!]
 }
 
 type Query {
