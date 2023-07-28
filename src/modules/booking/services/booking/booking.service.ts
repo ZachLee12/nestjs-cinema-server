@@ -24,12 +24,12 @@ export class BookingService {
         return userBooking
     }
 
-    async findAllUserBookings(): Promise<PrismaUserBooking[]> {
+    async findAll(): Promise<PrismaUserBooking[]> {
         const userBookings = await this.prisma.userBooking.findMany()
         return userBookings
     }
 
-    async findAllUserBookingsWithMovieId(movieId: string): Promise<PrismaUserBooking[]> {
+    async findAllWithMovieId(movieId: string): Promise<PrismaUserBooking[]> {
         return await this.prisma.userBooking.findMany(
             {
                 where: {

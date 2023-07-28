@@ -13,12 +13,12 @@ export class BookingResolver {
 
     @Query(() => [UserBookingDto])
     async userBookings() {
-        return this.bookingService.findAllUserBookings()
+        return this.bookingService.findAll()
     }
 
     @ResolveField('movie', () => MovieDto)
     async userBookingMovieResolver(@Parent() userBooking: UserBookingDto) {
-        return this.moviesService.findUnique(userBooking.movieId)
+        return this.moviesService.findOne(userBooking.movieId)
     }
 
 }

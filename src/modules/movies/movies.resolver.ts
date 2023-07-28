@@ -18,6 +18,6 @@ export class MoviesResolver {
 
     @ResolveField(() => [UserBookingDto])
     async resolveUserBooking(@Parent() movie: MovieDto) {
-        return this.bookingService.findAllUserBookingsWithMovieId(movie.id)
+        return this.bookingService.findAllWithMovieId(movie.id)
     }
 }

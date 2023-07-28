@@ -10,6 +10,11 @@ export class UsersResolver {
 
     @Query(returns => [UserDto])
     async users() {
-        return await this.usersService.findAllUsers()
+        return await this.usersService.findAll()
+    }
+
+    @Query(returns => UserDto)
+    async user(@Args('username') username: string) {
+        return await this.usersService.findOne(username)
     }
 }

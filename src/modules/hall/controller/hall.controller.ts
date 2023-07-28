@@ -10,11 +10,11 @@ export class HallController {
     //hall
     @Get(':hallId')
     async getOneHall(@Param('hallId') hallId: string) {
-        return await this.hallService.findOneHall(hallId);
+        return await this.hallService.findOne(hallId);
     }
 
     @Get(':movieId/:showtime')
     async getAllHalls(@Param('movieId') movieId: string, @Param('showtime') showtime: string) {
-        return await this.hallService.findHalls(movieId, showtime)
+        return await this.hallService.findAll(movieId, showtime)
     }
 }

@@ -18,7 +18,7 @@ export class MoviesService {
         return await this.prismaService.movie.findMany();
     }
 
-    async findUnique(id: string): Promise<PrismaMovie> {
+    async findOne(id: string): Promise<PrismaMovie> {
         let movie = null;
         try {
             movie = await this.prismaService.movie.findUnique({ where: { id } })

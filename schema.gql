@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type UserDto {
+  id: String!
   firstname: String!
   lastname: String!
   age: Int!
@@ -51,6 +52,7 @@ type HallDto {
 type Query {
   movies: [MovieDto!]!
   users: [UserDto!]!
+  user(username: String!): UserDto!
   userBookings: [UserBookingDto!]!
   halls(movieId: String!, showtime: String!): [HallDto!]!
 }

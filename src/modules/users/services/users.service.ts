@@ -9,12 +9,12 @@ export class UsersService {
         private prismaService: PrismaService
     ) { }
 
-    async findAllUsers(): Promise<PrismaUser[]> {
+    async findAll(): Promise<PrismaUser[]> {
         return await this.prismaService.user.findMany();
     }
 
     async create(createUserDto: UserDto): Promise<PrismaUser> {
-        if (await this.findOneUser(createUserDto.username)) {
+        if (await this.findOne(createUserDto.username)) {
             throw new BadRequestException('Username already taken.')
         }
         try {
@@ -29,7 +29,7 @@ export class UsersService {
         }
     }
 
-    async findOneUser(username: string): Promise<PrismaUser> {
+    async findOne(username: string): Promise<PrismaUser> {
         const user = await this.prismaService.user.findUnique({
             where: {
                 username

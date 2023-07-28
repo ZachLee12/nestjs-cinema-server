@@ -13,12 +13,12 @@ export class HallResolver {
 
     @Query(() => [HallDto])
     async halls(@Args('movieId') movieId: string, @Args('showtime') showtime: string) {
-        return this.hallService.findHalls(movieId, showtime)
+        return this.hallService.findAll(movieId, showtime)
     }
 
     @ResolveField('movie', () => MovieDto)
     async resolveMovieField(@Parent() hall: HallDto) {
-        return this.moviesService.findUnique(hall.movieId)
+        return this.moviesService.findOne(hall.movieId)
     }
 
 }

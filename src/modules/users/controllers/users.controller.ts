@@ -28,13 +28,13 @@ export class UsersController {
   @Get()
   @UseGuards(AuthGuard)
   getUsers() {
-    return this.usersService.findAllUsers()
+    return this.usersService.findAll()
   }
 
   @Get(':username')
   @UseGuards(AuthGuard)
   getOneUser(@Param('username') username: string) {
-    return this.usersService.findOneUser(username)
+    return this.usersService.findOne(username)
   }
 
   @Post()

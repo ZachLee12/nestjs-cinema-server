@@ -25,7 +25,7 @@ export class MoviesController {
 
     @Get(':id')
     async findUnique(@Param('id') id: string): Promise<Movie> {
-        return this.moviesService.findUnique(id);
+        return this.moviesService.findOne(id);
     }
 
     @Patch(':id')

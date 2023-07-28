@@ -16,6 +16,12 @@ class ValidateStrongPassword implements ValidatorConstraintInterface {
 
 @ObjectType()
 export class UserDto {
+
+    @Field(() => String)
+    @IsString()
+    @IsNotEmpty()
+    id: string;
+
     @Field(() => String)
     @IsNotEmpty()
     @IsString()
