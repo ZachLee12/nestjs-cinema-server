@@ -39,4 +39,11 @@ export class BookingService {
         )
     }
 
+    async findManyWithUserId(userId: string) {
+        console.log(userId)
+        return await this.prisma.userBooking.findMany({
+            where: { userId }
+        })
+    }
+
 }

@@ -17,4 +17,6 @@ export class UsersResolver {
     async user(@Args('username') username: string) {
         return await this.usersService.findOne(username)
     }
+
+
 }

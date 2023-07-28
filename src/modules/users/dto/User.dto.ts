@@ -46,7 +46,6 @@ export class UserDto {
     @IsString()
     username: string;
 
-    @Field(() => String)
     @Validate(ValidateStrongPassword)
     @IsString()
     password: string;

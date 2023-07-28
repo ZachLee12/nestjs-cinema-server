@@ -9,7 +9,6 @@ type UserDto {
   age: Int!
   birthday: String!
   username: String!
-  password: String!
 }
 
 type MovieDto {
@@ -54,5 +53,6 @@ type Query {
   users: [UserDto!]!
   user(username: String!): UserDto!
   userBookings: [UserBookingDto!]!
+  userBookingsWithUserId(userId: String!): [UserBookingDto!]!
   halls(movieId: String!, showtime: String!): [HallDto!]!
 }

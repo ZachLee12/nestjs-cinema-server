@@ -21,4 +21,9 @@ export class BookingResolver {
         return this.moviesService.findOne(userBooking.movieId)
     }
 
+    @Query(returns => [UserBookingDto])
+    async userBookingsWithUserId(@Args('userId') userId: string) {
+        return await this.bookingService.findManyWithUserId(userId)
+    }
+
 }
