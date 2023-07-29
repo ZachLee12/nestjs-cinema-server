@@ -49,4 +49,17 @@ export class UsersService {
         return user
     }
 
+    async updateOne(username: string, update: {}) {
+        try {
+            return await this.prismaService.user.update({
+                where: { username },
+                data: {
+                    ...update
+                }
+            })
+        } catch (error) {
+            throw error
+        }
+    }
+
 }

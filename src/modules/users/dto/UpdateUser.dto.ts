@@ -7,14 +7,14 @@ import { IsOptional, IsString, Validate } from "class-validator";
 
 @InputType()
 export class UpdateUserDto extends PartialType(UserDto) {
-    @Field()
+    @Field(returns => String, { nullable: true })
     @IsString()
     @IsOptional()
-    newUsername: string
+    username: string
 
-    @Field()
+    @Field(returns => String, { nullable: true })
     @IsString()
     @IsOptional()
     @Validate(ValidateStrongPassword)
-    newPassword: string
+    password: string
 }   

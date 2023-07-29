@@ -57,3 +57,12 @@ type Query {
   userBookingsWithUserId(userId: String!): [UserBookingDto!]!
   halls(movieId: String!, showtime: String!): [HallDto!]!
 }
+
+type Mutation {
+  updateUser(oldUsername: String!, update: UpdateUserDto!): UserDto!
+}
+
+input UpdateUserDto {
+  username: String
+  password: String
+}
