@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLength, Validate, ValidateNested, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 
 @ValidatorConstraint({ name: 'ValidateStrongPassword', async: false })
-class ValidateStrongPassword implements ValidatorConstraintInterface {
+export class ValidateStrongPassword implements ValidatorConstraintInterface {
     validate(value: any, validationArguments?: ValidationArguments): boolean {
         const regex = /^(?=.*[!@#$%^&*()\-=_+{}\[\]:;"'<>,.?/])(?=.*[A-Z]).{5,}$/
         return regex.test(value)
