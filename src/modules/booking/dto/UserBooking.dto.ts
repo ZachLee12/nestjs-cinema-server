@@ -50,14 +50,3 @@ export class UserBookingDto {
     @ArrayNotEmpty()
     seatsBooked: SeatBookedObject[]
 }
-
-// id          String @id @default(uuid())
-// user        User   @relation(fields: [userId], references: [id])
-// userId      String
-// movie       Movie  @relation(fields: [movieId], references: [id])
-// movieId     String
-// hall        Hall   @relation(fields: [hallId], references: [id])
-// hallId      String
-// seatsBooked Json[]
-
-// @@unique([userId, hallId, seatsBooked])

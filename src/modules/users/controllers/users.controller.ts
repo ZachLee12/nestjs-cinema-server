@@ -40,6 +40,7 @@ export class UsersController {
   @Post()
   @UsePipes(new ValidationPipe(), new EncryptionPipe())
   async addUser(@Body() userDto: UserDto): Promise<{ message: string } | Error> {
+    console.log(userDto)
     try {
       const user = await this.usersService.create(userDto)
       return { message: `user [${user.id}] created` }

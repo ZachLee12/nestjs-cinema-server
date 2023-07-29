@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { IsNotEmpty, IsNumber, IsObject, IsString, MinLength, Validate, ValidateNested, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
+import { IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, MinLength, Validate, ValidateNested, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 
 @ValidatorConstraint({ name: 'ValidateStrongPassword', async: false })
 class ValidateStrongPassword implements ValidatorConstraintInterface {
@@ -19,8 +19,8 @@ export class UserDto {
 
     @Field(() => String)
     @IsString()
-    @IsNotEmpty()
-    id: string;
+    @IsOptional()
+    id?: string;
 
     @Field(() => String)
     @IsNotEmpty()
