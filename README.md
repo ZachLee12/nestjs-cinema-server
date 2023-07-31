@@ -29,4 +29,4 @@ I built this project for my Software Engineer module in my 4th semester using Ex
 
 ### DevOps
 - Will deploy on probably Netlify, AWS or Heroku
-- For demo purposes, will deploy the full-stack app in a Kubernetes cluster or just Docker-Compose 
+- For demo purposes, will deploy the full-stack app in a [Kubernetes](https://kubernetes.io/) cluster or just [Docker Compose](https://docs.docker.com/compose/) 
